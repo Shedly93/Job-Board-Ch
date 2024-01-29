@@ -1,5 +1,5 @@
 <?php
-include 'config/config.php';
+require_once 'config.php';
 include 'utilisateur.php';
 
 // Récupérer les données du formulaire

@@ -1,6 +1,6 @@
 <?php
-include 'config/config.php';
-include 'entreprise.php';
+include '../entreprise.php';
+require_once 'config.php';
 
 $nom = $_POST['nom'];
 $adresse = $_POST['adresse'];

@@ -1,6 +1,6 @@
 <?php
-include 'config/config.php';
-include 'utilisateur.php';
+require_once 'config.php';
+include '../utilisateur.php';
 
 $name = $_POST['name'];
 $lastname = $_POST['lastname'];

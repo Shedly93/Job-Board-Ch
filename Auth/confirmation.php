@@ -8,7 +8,7 @@
 <body>
     <?php
     if (isset($_GET['success']) && $_GET['success'] == 1) {
-        echo "<p>Inscription réussie! Veuillez vous connecter <a href='login.php'>ici</a>.</p>";
+        echo "<p>Inscription réussie! Veuillez vous connecter <a href='login.html'>ici</a>.</p>";
     }
     ?>
 </body>
