@@ -18,7 +18,6 @@ class Entreprise {
         $this->password = $password;
     }
 
-    // Méthodes "getter"
     public function getId() { return $this->id; }
     public function getNom() { return $this->nom; }
     public function getAdresse() { return $this->adresse; }
@@ -27,19 +26,16 @@ class Entreprise {
     public function getDomaine() { return $this->domaine; }
     public function getPassword() { return $this->password; }
 
-    // Méthode magique __toString
     public function __toString() {
         return "Entreprise: {$this->nom}, Adresse: {$this->adresse}, Email: {$this->email}";
     }
 
-    // Méthode pour mettre à jour les informations dans la base de données
     public function updateInfoInDatabase($newNom, $newAdresse, $newEmail, $newLocalisation, $newDomaine, $conn) {
         $sql = "UPDATE entreprise SET nom_entreprise = '$newNom', adresse = '$newAdresse', email = '$newEmail', localisation = '$newLocalisation', domaine = '$newDomaine' WHERE id_entreprise = {$this->id}";
         $result = $conn->query($sql);
         return $result;
     }
 
-    // Méthode pour mettre à jour le mot de passe dans la base de données
     public function updatePasswordInDatabase($newPassword, $conn) {
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
         $sql = "UPDATE entreprise SET password = '$hashedPassword' WHERE id_entreprise = {$this->id}";
@@ -47,14 +43,12 @@ class Entreprise {
         return $result;
     }
 
-    // Méthode pour supprimer l'entreprise de la base de données
     public function deleteFromDatabase($conn) {
         $sql = "DELETE FROM entreprise WHERE id_entreprise = {$this->id}";
         $result = $conn->query($sql);
         return $result;
     }
 
-    // Méthode pour récupérer les informations de l'entreprise depuis la base de données
     public static function getInfoFromDatabase($entrepriseId, $conn) {
         $sql = "SELECT * FROM entreprise WHERE id_entreprise = $entrepriseId";
         $result = $conn->query($sql);

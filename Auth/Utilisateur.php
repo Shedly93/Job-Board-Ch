@@ -17,7 +17,7 @@ class Utilisateur {
         $this->description = $description;
     }
 
-    // Méthodes "getter"
+    
     public function getId() { return $this->id; }
     public function getNom() { return $this->nom; }
     public function getPrenom() { return $this->prenom; }
@@ -25,7 +25,7 @@ class Utilisateur {
     public function getPassword() { return $this->password; }
     public function getDescription() { return $this->description; }
 
-    // Méthode magique __toString
+    
     public function __toString() {
         return "Utilisateur: {$this->nom} {$this->prenom}, Email: {$this->email}";
     }
@@ -40,7 +40,7 @@ class Utilisateur {
         if ($result->num_rows > 0) {
             $userData = $result->fetch_assoc();
 
-            // Créez une instance de la classe Utilisateur avec les données de la base de données
+            
             $user = new Utilisateur(
                 $userData['id_user'],
                 $userData['nom'],
@@ -52,7 +52,7 @@ class Utilisateur {
 
             return $user;
         } else {
-            return null; // Utilisateur non trouvé
+            return null; 
         }
     }
 }
