@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2>Inscription Entreprise</h2>
-    <form action="InscriEmp.php" method="post">
+<form method="post" action="inscriEntreprise.php" enctype="application/x-www-form-urlencoded">
         <label for="nom">Nom de l'entreprise:</label>
         <input type="text" name="nom" required><br>
 
@@ -22,6 +22,9 @@
 
         <label for="domaine">Domaine:</label>
         <input type="text" name="domaine" required><br>
+
+        <label for="password">Mot de passe:</label>
+        <input type="password" name="password" required><br>
 
         <input type="submit" value="S'inscrire">
     </form>

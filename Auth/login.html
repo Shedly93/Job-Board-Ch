@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Login</title>
 </head>
 <body>
-    <h2>Connexion</h2>
+    <h2>Login</h2>
     <form action="login.php" method="post">
         <label for="mail">Email:</label>
         <input type="email" name="mail" required><br>
 
         <label for="password">Mot de passe:</label>
         <input type="password" name="password" required><br>
+
+        <label for="userType">Type d'utilisateur:</label>
+        <select name="userType" required>
+            <option value="utilisateur">Utilisateur</option>
+            <option value="entreprise">Entreprise</option>
+        </select><br>
 
         <input type="submit" value="Se connecter">
     </form>
