@@ -31,20 +31,16 @@ error_log("Mail: $mail, Password: $password, UserType: $userType");
 if ($result && $result->num_rows > 0) {
     $user = $result->fetch_assoc();
 
-    // Check if 'id_entreprise' key exists in the $user array
     if (isset($user['id_entreprise'])) {
         if (password_verify($password, $user['password'])) {
             session_start();
             session_regenerate_id(true);
-            $_SESSION['user_id'] = $user['id_entreprise'];  // Change to 'id_entreprise'
+            $_SESSION['user_id'] = $user['id_entreprise'];  
             
-            // Debugging
             $redirectMessage = "Login successful. Redirecting to: $redirect_page";
             error_log($redirectMessage);
 
-            // Attempting JavaScript redirection as a backup
-          // Attempting JavaScript redirection as a backup
-echo '<script>';
+            echo '<script>';
 echo "window.localStorage.setItem('redirectMessage', '" . addslashes($redirectMessage) . "');";
 echo 'window.location.replace("' . $redirect_page . '");';
 echo 'event.preventDefault();';
