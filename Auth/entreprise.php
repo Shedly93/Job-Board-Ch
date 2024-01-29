@@ -49,24 +49,24 @@ class Entreprise {
         return $result;
     }
 
-    public static function getInfoFromDatabase($entrepriseId, $conn) {
-        $sql = "SELECT * FROM entreprise WHERE id_entreprise = $entrepriseId";
-        $result = $conn->query($sql);
+   public static function getInfoFromDatabase($user_id, $conn) {
+    $sql = "SELECT * FROM entreprise WHERE id_entreprise = $user_id";
+    $result = $conn->query($sql);
 
-        if ($result && $result->num_rows > 0) {
-            $entrepriseData = $result->fetch_assoc();
-            return new Entreprise(
-                $entrepriseData['id_entreprise'],
-                $entrepriseData['nom_entreprise'],
-                $entrepriseData['adresse'],
-                $entrepriseData['email'],
-                $entrepriseData['localisation'],
-                $entrepriseData['domaine'],
-                $entrepriseData['password']
-            );
-        } else {
-            return null;
-        }
+    if ($result && $result->num_rows > 0) {
+        $entrepriseData = $result->fetch_assoc();
+        return new Entreprise(
+            $entrepriseData['id_entreprise'],
+            $entrepriseData['nom_entreprise'],
+            $entrepriseData['adresse'],
+            $entrepriseData['email'],
+            $entrepriseData['localisation'],
+            $entrepriseData['domaine'],
+            $entrepriseData['password']
+        );
+    } else {
+        return null;
     }
+}
 }
 ?>

@@ -46,6 +46,7 @@ if (isset($_SESSION['user_id'])) {
 
                 <div class="title"> <?= $user_info->getNom() ?>  <?= $user_info->getPrenom() ?></div>
                
+                <div class="desc">Email :<?= $user_info->getEmail() ?></div>
                 <div class="desc">description :<?= $user_info->getDescription() ?></div>
                <div class="actions">
     <button><i class="far fa-heart"></i></button>
