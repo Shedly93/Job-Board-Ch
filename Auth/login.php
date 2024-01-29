@@ -31,22 +31,23 @@ error_log("Mail: $mail, Password: $password, UserType: $userType");
 if ($result && $result->num_rows > 0) {
     $user = $result->fetch_assoc();
 
-    if (isset($user['id_entreprise'])) {
+    if ($userType == 'utilisateur' && isset($user['id_user'])) {
         if (password_verify($password, $user['password'])) {
             session_start();
-            session_regenerate_id(true);
-            $_SESSION['user_id'] = $user['id_entreprise'];  
-            
-            $redirectMessage = "Login successful. Redirecting to: $redirect_page";
-            error_log($redirectMessage);
-
-            echo '<script>';
-echo "window.localStorage.setItem('redirectMessage', '" . addslashes($redirectMessage) . "');";
-echo 'window.location.replace("' . $redirect_page . '");';
-echo 'event.preventDefault();';
-echo '</script>';
-
-
+            $_SESSION['user_id'] = $user['id_user'];
+            header("Location: $redirect_page");
+            ob_end_flush();
+            exit();
+        } else {
+            echo "Mot de passe incorrect";
+            ob_end_flush();
+            exit();
+        }
+    } elseif ($userType == 'entreprise' && isset($user['id_entreprise'])) {
+        if (password_verify($password, $user['password'])) {
+            session_start();
+            $_SESSION['user_id'] = $user['id_entreprise'];
+            header("Location: $redirect_page");
             ob_end_flush();
             exit();
         } else {
@@ -55,7 +56,7 @@ echo '</script>';
             exit();
         }
     } else {
-        echo "Clé 'id_entreprise' non définie dans le tableau";
+        echo "Clé 'id_entreprise' ou 'id_user' non définie dans le tableau";
         ob_end_flush();
         exit();
     }
