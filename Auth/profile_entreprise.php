@@ -37,6 +37,9 @@ if (isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="modal.css">
 </head>
 <body>
+    <!-- <a href="EmploiManagero.php"> -->
+<button ><i class="fas fa-user-edit" ></i> emploi</button>
+<!-- </a> -->
     <div class="card">
         <div class="img-avatar">
         </div>
@@ -86,7 +89,7 @@ if (isset($_SESSION['user_id'])) {
         var modal = document.getElementById('myModal');
         var openModalBtn = document.getElementById('openModalBtn');
         var closeModalBtn = document.getElementById('closeModalBtn');
-
+console.log()
         openModalBtn.onclick = function() {
             modal.style.display = 'block';
         }

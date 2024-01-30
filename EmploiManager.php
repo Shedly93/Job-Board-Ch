@@ -21,9 +21,10 @@ class EmploiManager {
         return $stmt->execute();
     }
 
-    public function updateEmploi($idEmploi, $titre, $description, $salaire, $contrat) {
-        $query = "UPDATE emploi SET titre = :titre, description = :description, salaire = :salaire, contrat = :contrat WHERE id_emploi = :idEmploi";
+    public function updateEmploi($idEmploi, $idEntreprise, $titre, $description, $salaire, $contrat) {
+        $query = "UPDATE emploi SET id_entrepriseE = :idEntreprise, titre = :titre, description = :description, salaire = :salaire, contrat = :contrat WHERE id_emploi = :idEmploi";
         $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':idEntreprise', $idEntreprise);
         $stmt->bindParam(':titre', $titre);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':salaire', $salaire);
@@ -46,5 +47,7 @@ class EmploiManager {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+
 }
 ?>
