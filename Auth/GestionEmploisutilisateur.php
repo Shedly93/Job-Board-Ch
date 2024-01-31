@@ -1,5 +1,6 @@
 <?php
 require_once 'Emploi.php';
+require_once 'Application.php';
 
 $servername = "localhost";
 $username = "root";
@@ -11,7 +12,6 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Connexion réussie à la base de données.";
 
-    // Créez une instance de la classe Emploi avec seulement la connexion
     $emploi = new Emploi($pdo, null, null, null, null, null, null, null);
 
 } catch (PDOException $e) {
@@ -31,39 +31,52 @@ if (isset($_POST['logout'])) {
     <link rel="stylesheet" href="styleGestionUser.css">
 </head>
 <body>
-    <!-- Votre contenu HTML ici -->
 
     <div class="container">
       <p class="container-title">List<br>Des Emplois</p>
 
-      <div class="gradient-cards">
-        <?php
-        $emplois = $emploi->getAllEmplois();
+     <div class="gradient-cards">
+    <?php
+    $emplois = $emploi->getAllEmplois();
 
-        if ($emplois) {
-            foreach ($emplois as $emploi) {
-                echo '<div class="card">';
-                echo '<div class="container-card bg-green-box">';
-                echo "<svg width='80' height='80' viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg'>";
-                echo "</svg>";
-                echo "<p class='card-title'>{$emploi['titre']}</p>";
-                echo "<p class='card-description'>{$emploi['description']} - Salaire: {$emploi['salaire']} - Contrat: {$emploi['contrat']}</p>";
-                echo '</div>';
-                echo '</div>';
-            }
-        } else {
-            echo "<p>Aucun emploi disponible.</p>";
+    if ($emplois) {
+        foreach ($emplois as $emploi) {
+            echo '<div class="card">';
+            echo '<div class="container-card bg-green-box">';
+            echo "<svg width='80' height='80' viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg'>";
+            echo "</svg>";
+            echo "<p class='card-title'>{$emploi['titre']}</p>";
+            echo "<p class='card-description'>{$emploi['description']} - Salaire: {$emploi['salaire']} - Contrat: {$emploi['contrat']}</p>";
+
+            echo '<form method="POST">';
+            echo '<input type="hidden" name="id_emploi" value="' . $emploi['id_emploi'] . '">';
+            echo '<input type="hidden" name="id_utilisateur" value="1">'; 
+            echo '<input type="submit" name="apply" value="Postuler">';
+            echo '</form>';
+
+            echo '</div>';
+            echo '</div>';
         }
-        ?>
-      </div>
+    } else {
+        echo "<p>Aucun emploi disponible.</p>";
+    }
+    ?>
+</div>
 
-      <form method="POST">
-          <button type="submit" name="logout">Logout</button>
-      </form>
+<?php
+if (isset($_POST['apply'])) {
+    $id_emploi = $_POST['id_emploi'];
+    $id_utilisateur = $_POST['id_utilisateur'];
+    
+    $application = new Application($pdo, null, null, null);
+    $application->postulerUtilisateur($id_emploi, $id_utilisateur, "Candidature pour le poste");
+}
+?>
 
-    </div>
+<form method="POST">
+    <button type="submit" name="logout">Logout</button>
+</form>
 
-    <!-- Vos scripts JavaScript ici -->
+</div>
 </body>
 </html>
-
