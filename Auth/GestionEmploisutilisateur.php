@@ -28,30 +28,42 @@ if (isset($_POST['logout'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Vos balises meta et autres en-têtes ici -->
+    <link rel="stylesheet" href="styleGestionUser.css">
 </head>
 <body>
     <!-- Votre contenu HTML ici -->
 
-    <?php
-    // Utilisez maintenant $emploi pour appeler les méthodes de la classe Emploi
-    $emplois = $emploi->getAllEmplois();
+    <div class="container">
+      <p class="container-title">List<br>Des Emplois</p>
 
-    if ($emplois) {
-        foreach ($emplois as $emploi) {
-            echo '<div class="job-card">';
-            echo "<p>{$emploi['titre']} - {$emploi['description']} - Salaire: {$emploi['salaire']} - Contrat: {$emploi['contrat']}  </p>";
-            echo '</div>';
+      <div class="gradient-cards">
+        <?php
+        $emplois = $emploi->getAllEmplois();
+
+        if ($emplois) {
+            foreach ($emplois as $emploi) {
+                echo '<div class="card">';
+                echo '<div class="container-card bg-green-box">';
+                echo "<svg width='80' height='80' viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg'>";
+                echo "</svg>";
+                echo "<p class='card-title'>{$emploi['titre']}</p>";
+                echo "<p class='card-description'>{$emploi['description']} - Salaire: {$emploi['salaire']} - Contrat: {$emploi['contrat']}</p>";
+                echo '</div>';
+                echo '</div>';
+            }
+        } else {
+            echo "<p>Aucun emploi disponible.</p>";
         }
-    } else {
-        echo "<p>Aucun emploi disponible.</p>";
-    }
-    ?>
+        ?>
+      </div>
 
-    <form method="POST">
-        <button type="submit" name="logout">Logout</button>
-    </form>
+      <form method="POST">
+          <button type="submit" name="logout">Logout</button>
+      </form>
+
+    </div>
 
     <!-- Vos scripts JavaScript ici -->
 </body>
 </html>
+

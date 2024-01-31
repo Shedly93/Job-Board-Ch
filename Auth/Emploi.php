@@ -63,6 +63,19 @@ $query = "SELECT * FROM emploi WHERE id_entreprise = ?";
     // Retourner les résultats
     return $resultats->fetch_all(MYSQLI_ASSOC);
 }
+  public function updateEmploi($idEmploi, $titre, $description, $salaire, $contrat) {
+        $query = "UPDATE emploi SET titre=?, description=?, salaire=?, contrat=? WHERE id=?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('ssssi', $titre, $description, $salaire, $contrat, $idEmploi);
+        return $stmt->execute();
+    }
 
+    public function deleteEmploi($idEmploi) {
+        $query = "DELETE FROM emploi WHERE id=?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('i', $idEmploi);
+        return $stmt->execute();
+    }
+    
 }
 ?>
