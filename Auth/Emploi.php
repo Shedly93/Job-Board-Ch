@@ -51,27 +51,26 @@ class Emploi {
 }
 
 
-public function getEmploisParEntreprise($idEntreprise) {
-$query = "SELECT * FROM emploi WHERE id_entreprise = ?";
-    $stmt = $this->conn->prepare($query);
-    $stmt->bind_param('i', $idEntreprise);
-    $stmt->execute();
-
-    // Récupérer les résultats
-    $resultats = $stmt->get_result();
-
-    // Retourner les résultats
-    return $resultats->fetch_all(MYSQLI_ASSOC);
-}
-  public function updateEmploi($idEmploi, $titre, $description, $salaire, $contrat) {
-        $query = "UPDATE emploi SET titre=?, description=?, salaire=?, contrat=? WHERE id=?";
+ public function getEmploisParEntreprise($idEntreprise) {
+        $query = "SELECT * FROM emploi WHERE id_entreprise = ?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param('ssssi', $titre, $description, $salaire, $contrat, $idEmploi);
-        return $stmt->execute();
+        $stmt->bind_param('i', $idEntreprise);
+        $stmt->execute();
+
+       
+        $resultats = $stmt->get_result();
+        return $resultats->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function deleteEmploi($idEmploi) {
-        $query = "DELETE FROM emploi WHERE id=?";
+public function updateEmploi($idEmploi, $titre, $description, $salaire, $contrat) {
+    $query = "UPDATE emploi SET titre=?, description=?, salaire=?, contrat=? WHERE id_emploi=?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param('ssssi', $titre, $description, $salaire, $contrat, $idEmploi);
+    return $stmt->execute();
+}
+
+  public function deleteEmploi($idEmploi) {
+        $query = "DELETE FROM emploi WHERE id_emploi=?";
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param('i', $idEmploi);
         return $stmt->execute();
