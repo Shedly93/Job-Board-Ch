@@ -37,9 +37,40 @@ if (isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="modal.css">
 </head>
 <body>
-    <!-- <a href="EmploiManagero.php"> -->
-<button ><i class="fas fa-user-edit" ></i> emploi</button>
-<!-- </a> -->
+    <script>
+    function redirectToGestionEmploisEntreprise(idEntreprise, userId, userType) {
+            window.location.href = `GestionEmploisEntreprise.php?idEntreprise=${idEntreprise}&userId=${userId}&userType=${userType}`;
+        }
+
+    var userId = localStorage.getItem('user_id');
+    var userType = localStorage.getItem('user_type');
+
+    console.log("User ID:", userId);
+    console.log("User Type:", userType);
+
+    var modal = document.getElementById('myModal');
+var openModalBtn = document.getElementById('openModalBtn');
+    var closeModalBtn = document.getElementById('closeModalBtn');
+
+    openModalBtn.onclick = function () {
+        modal.style.display = 'block';
+    }
+
+    closeModalBtn.onclick = function () {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+</script>
+
+  <button onclick="redirectToGestionEmploisEntreprise(<?= $user_id ?>, <?= $user_id ?>, 'entreprise')">
+        <i class="fas fa-search"></i> Emploi
+    </button>
+
     <div class="card">
         <div class="img-avatar">
         </div>
@@ -84,26 +115,34 @@ if (isset($_SESSION['user_id'])) {
             </form>
         </div>
     </div>
+  <script>
+   
 
-    <script>
-        var modal = document.getElementById('myModal');
-        var openModalBtn = document.getElementById('openModalBtn');
-        var closeModalBtn = document.getElementById('closeModalBtn');
-console.log()
-        openModalBtn.onclick = function() {
-            modal.style.display = 'block';
-        }
+    var userId = localStorage.getItem('user_id');
+    var userType = localStorage.getItem('user_type');
 
-        closeModalBtn.onclick = function() {
+    console.log("User ID:", userId);
+    console.log("User Type:", userType);
+
+    var modal = document.getElementById('myModal');
+var openModalBtn = document.getElementById('openModalBtn');
+    var closeModalBtn = document.getElementById('closeModalBtn');
+
+    openModalBtn.onclick = function () {
+        modal.style.display = 'block';
+    }
+
+    closeModalBtn.onclick = function () {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
             modal.style.display = 'none';
         }
+    }
+</script>
 
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
-    </script>
 </body>
 </html>
 <?php

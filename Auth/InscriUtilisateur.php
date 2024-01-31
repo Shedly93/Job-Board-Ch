@@ -1,38 +1,35 @@
 <?php
 require_once 'config.php';
-require_once 'Utilisateur.php';
+require_once 'utilisateur.php'; // Assuming your Utilisateur class is in utilisateur.php
 
-$name = $_POST['name'];
-$lastname = $_POST['lastname'];
-$mail = $_POST['mail'];
-$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $name = $_POST['name'];
+    $lastname = $_POST['lastname'];
+    $mail = $_POST['mail'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
+    $user = new Utilisateur(null, $name, $lastname, $mail, $password, null);
 
-$user = new Utilisateur(null, $name, $lastname, $mail, $password, null);
+    $sql = "INSERT INTO utilisateur (nom, prenom, email, password) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
 
+    if ($stmt) {
+        $stmt->bind_param('ssss', $name, $lastname, $mail, $password);
 
-$sql = "INSERT INTO utilisateur (nom, prenom, email, password) VALUES (?, ?, ?, ?)";
-$stmt = $conn->prepare($sql);
+        if ($stmt->execute()) {
+            header("Location: confirmation.php?success=1");
+            exit(); // Ensure that the script terminates after redirection
+        } else {
+            echo "Erreur d'exécution de la requête : " . $stmt->error;
+        }
 
-if ($stmt) {
-    $stmt->bind_param('ssss', $name, $lastname, $mail, $password); 
-
-    
-    if ($stmt->execute()) {
-        
-        header("Location: confirmation.php?success=1");
+        $stmt->close();
     } else {
-        
-        echo "Erreur d'exécution de la requête : " . $stmt->error;
+        echo "Erreur de préparation de la requête : " . $conn->error;
     }
-
-    
-    $stmt->close();
 } else {
-    
-    echo "Erreur de préparation de la requête : " . $conn->error;
+    // Handle non-POST requests if needed
 }
-
 
 $conn->close();
 ?>

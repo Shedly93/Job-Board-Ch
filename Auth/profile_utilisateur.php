@@ -36,6 +36,7 @@ if (isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="modal.css">
 </head>
 <body>
+    <button onclick="redirectToGestionEmplois()"><i class="fas fa-search"></i> Recherche Emploi</button>
     <div class="card">
         <div class="img-avatar">
         </div>
@@ -82,6 +83,12 @@ if (isset($_SESSION['user_id'])) {
         var modal = document.getElementById('myModal');
         var openModalBtn = document.getElementById('openModalBtn');
         var closeModalBtn = document.getElementById('closeModalBtn');
+        
+ var userId = localStorage.getItem('user_id');
+        var userType = localStorage.getItem('user_type');
+
+        console.log("User ID:", userId);
+        console.log("User Type:", userType);
 
         openModalBtn.onclick = function() {
             modal.style.display = 'block';
@@ -95,6 +102,9 @@ if (isset($_SESSION['user_id'])) {
             if (event.target == modal) {
                 modal.style.display = 'none';
             }
+        }
+        function redirectToGestionEmplois() {
+            window.location.href = 'GestionEmploisutilisateur.php';
         }
     </script>
 </body>
