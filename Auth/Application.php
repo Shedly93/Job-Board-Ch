@@ -24,9 +24,9 @@ public function postulerUtilisateur($id_emploi, $id_utilisateur, $description) {
     $checkStmt->execute([$id_emploi, $id_utilisateur]);
 
     if ($checkStmt->fetch(PDO::FETCH_ASSOC)) {
-       
         return false;
     }
+
     $insertQuery = "INSERT INTO application (id_emploiA, id_utilisateurA, date_app) VALUES (?, ?, ?)";
     $insertStmt = $this->conn->prepare($insertQuery);
 
@@ -36,6 +36,7 @@ public function postulerUtilisateur($id_emploi, $id_utilisateur, $description) {
 
     return $insertStmt->execute();
 }
+
 
 
 

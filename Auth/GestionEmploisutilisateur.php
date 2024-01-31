@@ -7,6 +7,8 @@ $username = "root";
 $password = ""; 
 $database = "job1";
 
+$message = "";
+
 try {
     $pdo = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -69,9 +71,21 @@ if (isset($_POST['apply'])) {
     $id_utilisateur = $_POST['id_utilisateur'];
     
     $application = new Application($pdo, null, null, null);
-    $application->postulerUtilisateur($id_emploi, $id_utilisateur, "Candidature pour le poste");
+
+    try {
+        if ($application->postulerUtilisateur($id_emploi, $id_utilisateur, "Candidature pour le poste")) {
+            $message = "Postulation réussie!";
+        } else {
+            $message = "La postulation a échoué. Veuillez réessayer.";
+        }
+   } catch (PDOException $e) {
+    $message = "Erreur MySQL : " . $e->getMessage();
+}
+
 }
 ?>
+
+<p><?php echo $message; ?></p>
 
 <form method="POST">
     <button type="submit" name="logout">Logout</button>
