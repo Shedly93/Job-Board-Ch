@@ -38,7 +38,7 @@ public function postulerUtilisateur($id_emploi, $id_utilisateur, $description) {
 }
 
 public function getApplicationsParEmploi($id_emploi) {
-    $query = "SELECT utilisateur.nom AS nom_utilisateur, entreprise.nom_entreprise, application.date_app, utilisateur.description
+    $query = "SELECT utilisateur.nom AS nom_utilisateur, entreprise.nom_entreprise, application.date_app, application.id_emploiA, utilisateur.description
               FROM application
               JOIN utilisateur ON application.id_utilisateurA = utilisateur.id_user
               JOIN emploi ON application.id_emploiA = emploi.id_emploi

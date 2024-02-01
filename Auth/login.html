@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css.css">
     <title>Login</title>
     <script>
         function storeInLocalStorage(userId, userType) {
@@ -13,21 +14,39 @@
     </script>
 </head>
 <body>
+            <div class="container-register">
+
     <h2>Login</h2>
     <form action="login.php" method="post">
-        <label for="mail">Email:</label>
-        <input type="email" name="mail" required><br>
+                    <div class="box">
 
-        <label for="password">Mot de passe:</label>
-        <input type="password" name="password" required><br>
+        <label class="fl fontLabel" for="mail">Email:</label>
+                        <div class="fl iconBox"><i class="fa fa-key" aria-hidden="true"></i></div>
 
-        <label for="userType">Type d'utilisateur:</label>
-        <select name="userType" required>
+        <input type="email" name="mail"class="textBox" required><br>
+</div>
+                    <div class="box">
+
+        <label class="fl fontLabel" for="password">Mot de passe:</label>
+                        <div class="fl iconBox"><i class="fa fa-key" aria-hidden="true"></i></div>
+
+        <input type="password" name="password" class="textBox" required><br>
+</div>
+                            <div class="box">
+
+        <label class="fl fontLabel" for="userType">Type d'utilisateur:</label>
+                        <div class="fl iconBox"><i class="fa fa-key" aria-hidden="true"></i></div>
+
+        <select name="userType" required class="textBox">
             <option value="utilisateur">Utilisateur</option>
             <option value="entreprise">Entreprise</option>
         </select><br>
+</div>
+            <div class="box" style="background: #2d3e3f">
 
-        <input type="submit" value="Se connecter">
+        <input type="submit" value="Se connecter" class="submit-register">
+</div>
     </form>
+    </div>
 </body>
 </html>

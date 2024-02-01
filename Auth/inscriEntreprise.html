@@ -3,30 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css.css">
     <title>Inscription Entreprise</title>
 </head>
 <body>
+        <div class="container-register">
     <h2>Inscription Entreprise</h2>
-<form method="post" action="inscriEntreprise.php" enctype="application/x-www-form-urlencoded">
-        <label for="nom">Nom de l'entreprise:</label>
-        <input type="text" name="nom" required><br>
 
-        <label for="adresse">Adresse:</label>
-        <input type="text" name="adresse" required><br>
+       <form action="InscriUtilisateur.php" method="post" autocomplete="on">
+            <!-- Nom -->
+            <div class="box">
+                <label for="nom" class="fl fontLabel"> Nom : </label>
+                <div class="new iconBox">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </div>
+                <div class="fr">
+                    <input type="text" name="name" placeholder="nom" class="textBox" autofocus="on" required>
+                </div>
+                <div class="clr"></div>
+            </div>
+            
+            <!-- Prenom -->
+            <div class="box">
+                <label for="adresse" class="fl fontLabel"> Adresse: </label>
+                <div class="fl iconBox"><i class="fa fa-user" aria-hidden="true"></i></div>
+                <div class="fr">
+                    <input type="text" name="adresse" placeholder="adresse" class="textBox" autofocus="on" required>
+                </div>
+                <div class="clr"></div>
+            </div>
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" required><br>
+            <!-- Email -->
+            <div class="box">
+                <label for="email" class="fl fontLabel"> Email : </label>
+                <div class="fl iconBox"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                <div class="fr">
+                    <input type="email" required name="mail" placeholder="Email Id" class="textBox">
+                </div>
+                <div class="clr"></div>
+            </div>
 
-        <label for="localisation">Localisation:</label>
-        <input type="text" name="localisation" required><br>
+            <!-- Password -->
+            <div class="box">
+                <label for="localisation" class="fl fontLabel"> Localisation </label>
+                <div class="fl iconBox"><i class="fa fa-key" aria-hidden="true"></i></div>
+                <div class="fr">
+                    <input type="localisation" required name="localisation" placeholder="Localisation" class="textBox">
+                </div>
+                <div class="clr"></div>
+            </div>
+<div class="box">
+                <label for="domaine" class="fl fontLabel"> Domaine </label>
+                <div class="fl iconBox"><i class="fa fa-key" aria-hidden="true"></i></div>
+                <div class="fr">
+                    <input type="domaine" required name="domaine" placeholder="Domaine" class="textBox">
+                </div>
+                <div class="clr"></div>
+            </div>
 
-        <label for="domaine">Domaine:</label>
-        <input type="text" name="domaine" required><br>
-
-        <label for="password">Mot de passe:</label>
-        <input type="password" name="password" required><br>
-
-        <input type="submit" value="S'inscrire">
-    </form>
-</body>
+            <div class="box">
+                <label for="password" class="fl fontLabel"> Mot de passe </label>
+                <div class="fl iconBox"><i class="fa fa-key" aria-hidden="true"></i></div>
+                <div class="fr">
+                    <input type="Password" required name="password" placeholder="Mot de passe" class="textBox">
+                </div>
+                <div class="clr"></div>
+            </div>
+            <div class="box" style="background: #2d3e3f">
+                <input type="Submit" name="Submit" class="submit-register" value="S'inscrire">
+            </div>
+        </form>
+</div>
+    </body>
 </html>
+

@@ -38,16 +38,25 @@ if (isset($_SESSION['user_id'])) {
             $emploi->deleteEmploi($idEmploiToDelete);
         }
 
-if (isset($_GET['viewUserPostModal'])) {
-    $idEmploiForModal = $_GET['viewUserPostModal'];
-    $application = new Application($conn, null, null);
-    $applicationsData = $application->getApplicationsParEmploi($idEmploiForModal);
+        if (isset($_GET['viewUserPostModal'])) {
+            $idEmploiForModal = $_GET['viewUserPostModal'];
+            $application = new Application($conn, null, null);
+            $applicationsData = $application->getApplicationsParEmploi($idEmploiForModal);
 
-    header('Content-Type: application/json'); // Indique que le contenu est en JSON
-echo trim(json_encode($applicationsData));
+            header('Content-Type: application/json');
 
-    exit();
+           if ($applicationsData) {
+    header('Content-Type: application/json');
+    echo json_encode($applicationsData);
+} else {
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'No data found for employment ' . $idEmploiForModal]);
 }
+
+exit();
+
+        }
+
 
 $emploisEntreprise = $emploi->getEmploisParEntreprise($entreprise_info->getId());
 
@@ -56,8 +65,6 @@ $emploisEntreprise = $emploi->getEmploisParEntreprise($entreprise_info->getId())
 } else {
     echo "Erreur : Impossible d'obtenir les informations de l'entreprise.";
 }
-
-// Set $applicationsData to an empty array if not defined
 $applicationsData = isset($applicationsData) ? $applicationsData : [];
 
 } else {
@@ -110,9 +117,9 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
                     <button type="button" class="btn btn-danger" onclick="confirmDelete(<?= $emploi['id_emploi']; ?>)">
                         Supprimer l'emploi
                     </button>
-  <button type="button" class="btn btn-success view-post-btn" data-toggle="modal" data-target="#applicationModal<?= $emploi['id_emploi']; ?>" onclick="viewUserPost(<?= $emploi['id_emploi']; ?>)">
-            View User Post
-        </button>
+<button type="button" class="btn btn-success view-post-btn" data-toggle="modal" data-target="#applicationModal<?= $emploi['id_emploi']; ?>" onclick="viewUserPost(<?= $emploi['id_emploi']; ?>, '<?= $emploi['nom_entreprise']; ?>')">
+        View User Post
+    </button>
 
 <div class="modal" tabindex="-1" role="dialog" id="emploiModal<?= $emploi['id_emploi']; ?>">
                         <div class="modal-dialog" role="document">
@@ -145,21 +152,21 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
                     </div>
 
                     
-                      <div class="modal" tabindex="-1" role="dialog" id="applicationModal<?= $emploi['id_emploi']; ?>">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Application Details</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" id="modalContent">
-                        <!-- Contenu du modal ici -->
-                    </div>
-                </div>
+<div class="modal" tabindex="-1" role="dialog" id="applicationModal<?= $emploi['id_emploi']; ?>">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Application Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalContent<?= $emploi['id_emploi']; ?>">
+              
             </div>
         </div>
+    </div>
+</div>
 
                 </div>
             <?php endforeach; ?>
@@ -186,43 +193,32 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
                 document.querySelector('form[name="deleteForm' + idEmploi + '"]').submit();
             }
         }
-function viewUserPost(idEmploi) {
-    var btn = document.querySelector('.view-post-btn[data-target="#emploiModal' + idEmploi + '"]');
-    var modalId = 'genericModal' + idEmploi;
+  
 
+</script>
+<script>
+function viewUserPost(idEmploi, nomEntreprise) {
     var xhr = new XMLHttpRequest();
+    var btn = document.querySelector('.view-post-btn[data-target="#applicationModal' + idEmploi + '"]');
+    var modalContent = document.getElementById('modalContent' + idEmploi);
+
     xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            console.log(xhr.responseText); // Affiche la réponse dans la console
+            console.log('Response from server:', xhr.responseText); 
+
             if (xhr.status === 200) {
-                // Utiliser une expression régulière pour extraire le JSON de la réponse
-                var jsonMatch = xhr.responseText.match(/\[.*\]/);
-                if (jsonMatch) {
-                    var jsonData = JSON.parse(jsonMatch[0]);
-                    
-                    // Affichage des détails dans la console (à des fins de vérification)
-                    console.log(jsonData);
+                try {
+                    var data = JSON.parse(xhr.responseText);
 
-                    // Ajoutez le code pour afficher les détails dans votre modal
-                    var modalContent = document.getElementById('modalContent');
-                    modalContent.innerHTML = ''; // Efface le contenu précédent
-
-                    // Parcours des données JSON pour créer les balises HTML
-                    for (var key in jsonData[0]) {
-                        if (jsonData[0].hasOwnProperty(key)) {
-                            var value = jsonData[0][key];
-                            var paragraph = document.createElement('p');
-                            paragraph.innerHTML = '<strong>' + key + ':</strong> ' + value;
-                            modalContent.appendChild(paragraph);
-                        }
-                    }
-
-                    $('#' + modalId).modal('show');
-                } else {
-                    console.error('Aucun JSON trouvé dans la réponse.');
+                    modalContent.innerHTML = '<p>Nom de l\'entreprise: ' + nomEntreprise + '</p>' +
+                                             '<p>Nom de l\'utilisateur: ' + data.nom_utilisateur + '</p>' +
+                                             '<p>Date d\'application: ' + data.date_app + '</p>' +
+                                             '<p>Description de l\'utilisateur: ' + data.description + '</p>';
+                } catch (e) {
+                    console.error('Error parsing JSON: ' + e);
                 }
             } else {
-                console.error('Erreur lors de la récupération des détails de l\'application:', xhr.status);
+                console.error('Error fetching data for employment ' + idEmploi);
             }
         }
     };
@@ -231,7 +227,7 @@ function viewUserPost(idEmploi) {
     xhr.send();
 }
 
-
 </script>
+
 </body>
 </html>
