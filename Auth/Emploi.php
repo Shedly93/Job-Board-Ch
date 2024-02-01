@@ -29,6 +29,12 @@ class Emploi {
     public function getContrat() { return $this->contrat; }
     public function getDatePost() { return $this->datePost; }
 
+
+
+// ...
+
+
+
  public function postEmploi($idEntreprise, $titre, $description, $salaire, $contrat)
 {
     $datePost = date("Y-m-d H:i:s");
@@ -79,5 +85,49 @@ public function updateEmploi($idEmploi, $titre, $description, $salaire, $contrat
         return $stmt->execute();
     }
     
+    public function getInfoFromDatabase($conn) {
+    $sql = "SELECT * FROM emploi WHERE id_emploi = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $this->id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+
+    if ($result->num_rows > 0) {
+        $emploiData = $result->fetch_assoc();
+
+        return new Emploi(
+            $conn,
+            $emploiData['id_emploi'],
+            $emploiData['id_entreprise'],
+            $emploiData['titre'],
+            $emploiData['description'],
+            $emploiData['salaire'],
+            $emploiData['contrat'],
+            $emploiData['date_post']
+        );
+    } else {
+        return null;
+    }
 }
+   public function getNomEntrepriseFromDatabase($id_entreprise, $conn) {
+        $sql = "SELECT nom_entreprise FROM entreprise WHERE id_entreprise = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id_entreprise);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+
+        if ($result->num_rows > 0) {
+            $entrepriseData = $result->fetch_assoc();
+            return $entrepriseData['nom_entreprise'];
+        } else {
+            return null;
+        }
+    }
+   public function getNomEntreprise() {
+        return $this->getNomEntrepriseFromDatabase($this->id_entrepriseE, $this->conn);
+    }
+}
+
 ?>

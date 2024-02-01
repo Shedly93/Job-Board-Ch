@@ -38,24 +38,6 @@ if (isset($_SESSION['user_id'])) {
             $emploi->deleteEmploi($idEmploiToDelete);
         }
 
-        if (isset($_GET['viewUserPostModal'])) {
-            $idEmploiForModal = $_GET['viewUserPostModal'];
-            $application = new Application($conn, null, null);
-            $applicationsData = $application->getApplicationsParEmploi($idEmploiForModal);
-
-            header('Content-Type: application/json');
-
-           if ($applicationsData) {
-    header('Content-Type: application/json');
-    echo json_encode($applicationsData);
-} else {
-    header('Content-Type: application/json');
-    echo json_encode(['error' => 'No data found for employment ' . $idEmploiForModal]);
-}
-
-exit();
-
-        }
 
 
 $emploisEntreprise = $emploi->getEmploisParEntreprise($entreprise_info->getId());
@@ -110,16 +92,23 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
                     <p>Salaire: <?= $emploi['salaire']; ?></p>
                     <p>Contrat: <?= $emploi['contrat']; ?></p>
                     <p>date post: <?= $emploi['date_post']; ?></p>
-
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emploiModal<?= $emploi['id_emploi']; ?>" onclick="logIdEmploi(<?= $emploi['id_emploi']; ?>)">
-                        Modifier l'emploi
-                    </button>
+ 
+<!-- Bouton "Modifier l'emploi" -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emploiModal<?= $emploi['id_emploi']; ?>" onclick="logIdEmploi(<?= $emploi['id_emploi']; ?>)">
+    Modifier l'emploi
+</button>
                     <button type="button" class="btn btn-danger" onclick="confirmDelete(<?= $emploi['id_emploi']; ?>)">
                         Supprimer l'emploi
                     </button>
-<button type="button" class="btn btn-success view-post-btn" data-toggle="modal" data-target="#applicationModal<?= $emploi['id_emploi']; ?>" onclick="viewUserPost(<?= $emploi['id_emploi']; ?>, '<?= $emploi['nom_entreprise']; ?>')">
-        View User Post
-    </button>
+
+<!-- Bouton "Postuler" -->
+<a href="PostulerUser.php?id_emploi=<?= $emploi['id_emploi']; ?>" class="btn btn-success" onclick="logIdEmploi(<?= $emploi['id_emploi']; ?>)">
+    Postuler
+</a>
+
+
+
+
 
 <div class="modal" tabindex="-1" role="dialog" id="emploiModal<?= $emploi['id_emploi']; ?>">
                         <div class="modal-dialog" role="document">
@@ -151,22 +140,7 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
                         </div>
                     </div>
 
-                    
-<div class="modal" tabindex="-1" role="dialog" id="applicationModal<?= $emploi['id_emploi']; ?>">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Application Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="modalContent<?= $emploi['id_emploi']; ?>">
-              
-            </div>
-        </div>
-    </div>
-</div>
+   
 
                 </div>
             <?php endforeach; ?>
@@ -177,15 +151,18 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
       
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script>
-        function logIdEmploi(idEmploi) {
-            console.log('ID Emploi cliqué:', idEmploi);
-        }
+       function logIdEmploi(idEmploi) {
+    console.log('ID Emploi cliqué:', idEmploi);
+
+    // Stocker l'ID de l'emploi dans le localStorage
+    localStorage.setItem('id_emploi', idEmploi);
+
+}
 
         function confirmDelete(idEmploi) {
             if (confirm("Êtes-vous sûr de vouloir supprimer cet emploi?")) {
@@ -196,37 +173,21 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
   
 
 </script>
+
 <script>
-function viewUserPost(idEmploi, nomEntreprise) {
-    var xhr = new XMLHttpRequest();
-    var btn = document.querySelector('.view-post-btn[data-target="#applicationModal' + idEmploi + '"]');
-    var modalContent = document.getElementById('modalContent' + idEmploi);
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            console.log('Response from server:', xhr.responseText); 
-
-            if (xhr.status === 200) {
-                try {
-                    var data = JSON.parse(xhr.responseText);
-
-                    modalContent.innerHTML = '<p>Nom de l\'entreprise: ' + nomEntreprise + '</p>' +
-                                             '<p>Nom de l\'utilisateur: ' + data.nom_utilisateur + '</p>' +
-                                             '<p>Date d\'application: ' + data.date_app + '</p>' +
-                                             '<p>Description de l\'utilisateur: ' + data.description + '</p>';
-                } catch (e) {
-                    console.error('Error parsing JSON: ' + e);
-                }
-            } else {
-                console.error('Error fetching data for employment ' + idEmploi);
+    function postuler(idEmploi) {
+        $.ajax({
+            type: "POST",
+            url: "PostulerUser.php",
+            data: { postuler: true },
+            success: function(response) {
+                alert(response); // Affiche la réponse du serveur
+            },
+            error: function(error) {
+                console.error("Erreur lors de l'envoi de la postulation:", error);
             }
-        }
-    };
-
-    xhr.open('GET', 'GestionEmploisEntreprise.php?viewUserPostModal=' + idEmploi, true);
-    xhr.send();
-}
-
+        });
+    }
 </script>
 
 </body>

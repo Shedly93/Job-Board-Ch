@@ -6,6 +6,10 @@ require_once 'Entreprise.php';
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
+      // Vérifier si l'ID de l'entreprise est stocké dans le localStorage
+    if (isset($_POST['id_entreprise_localstorage'])) {
+        $user_id = mysqli_real_escape_string($conn, $_POST['id_entreprise']);
+    }
     $entreprise_info = Entreprise::getInfoFromDatabase($user_id, $conn);
 
     if ($entreprise_info) {
@@ -38,9 +42,12 @@ if (isset($_SESSION['user_id'])) {
 </head>
 <body>
     <script>
-    function redirectToGestionEmploisEntreprise(idEntreprise, userId, userType) {
-            window.location.href = `GestionEmploisEntreprise.php?idEntreprise=${idEntreprise}&userId=${userId}&userType=${userType}`;
-        }
+   function redirectToGestionEmploisEntreprise(idEntreprise, userId, userType) {
+    // Ajouter le code pour stocker l'ID de l'entreprise dans le localStorage
+    localStorage.setItem('id_entreprise', idEntreprise);
+    window.location.href = `GestionEmploisEntreprise.php?idEntreprise=${idEntreprise}&userId=${userId}&userType=${userType}`;
+}
+
 
     var userId = localStorage.getItem('user_id');
     var userType = localStorage.getItem('user_type');

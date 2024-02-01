@@ -1,4 +1,7 @@
 <?php
+// Assurez-vous d'avoir une session active avec l'ID de l'utilisateur
+session_start();
+
 require_once 'Emploi.php';
 require_once 'Application.php';
 
@@ -24,7 +27,6 @@ if (isset($_POST['logout'])) {
     header("Location: login.html");
     exit();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -33,64 +35,60 @@ if (isset($_POST['logout'])) {
     <link rel="stylesheet" href="styleGestionUser.css">
 </head>
 <body>
-
     <div class="container">
-      <p class="container-title">List<br>Des Emplois</p>
+        <p class="container-title">List<br>Des Emplois</p>
+        <div class="gradient-cards">
+            <?php
+            $emplois = $emploi->getAllEmplois();
 
-     <div class="gradient-cards">
-    <?php
-    $emplois = $emploi->getAllEmplois();
+            if ($emplois) {
+                foreach ($emplois as $emploi) {
+                    echo '<div class="card">';
+                    echo '<div class="container-card bg-green-box">';
+                    echo "<svg width='80' height='80' viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg'>";
+                    echo "</svg>";
+                    echo "<p class='card-title'>{$emploi['titre']}</p>";
+                    echo "<p class='card-description'>{$emploi['description']} - Salaire: {$emploi['salaire']} - Contrat: {$emploi['contrat']}</p>";
 
-    if ($emplois) {
-        foreach ($emplois as $emploi) {
-            echo '<div class="card">';
-            echo '<div class="container-card bg-green-box">';
-            echo "<svg width='80' height='80' viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg'>";
-            echo "</svg>";
-            echo "<p class='card-title'>{$emploi['titre']}</p>";
-            echo "<p class='card-description'>{$emploi['description']} - Salaire: {$emploi['salaire']} - Contrat: {$emploi['contrat']}</p>";
+                    echo '<form method="POST">';
+                    echo '<input type="hidden" name="id_emploi" value="' . $emploi['id_emploi'] . '">';
+                    echo '<input type="hidden" name="id_utilisateur" value="' . $_SESSION['user_id'] . '">';
+                    echo '<input type="submit" name="apply" value="Postuler">';
+                    echo '</form>';
 
-            echo '<form method="POST">';
-            echo '<input type="hidden" name="id_emploi" value="' . $emploi['id_emploi'] . '">';
-            echo '<input type="hidden" name="id_utilisateur" value="1">'; 
-            echo '<input type="submit" name="apply" value="Postuler">';
-            echo '</form>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+            } else {
+                echo "<p>Aucun emploi disponible.</p>";
+            }
+            ?>
+        </div>
 
-            echo '</div>';
-            echo '</div>';
+        <?php
+        if (isset($_POST['apply'])) {
+            $id_emploi = $_POST['id_emploi'];
+            $id_utilisateur = $_POST['id_utilisateur'];
+            
+            $application = new Application($pdo, null, null, null);
+
+            try {
+                if ($application->postulerUtilisateur($id_emploi, $id_utilisateur, "Candidature pour le poste")) {
+                    $message = "Postulation réussie!";
+                } else {
+                    $message = "La postulation a échoué. Veuillez réessayer.";
+                }
+            } catch (PDOException $e) {
+                $message = "Erreur MySQL : " . $e->getMessage();
+            }
         }
-    } else {
-        echo "<p>Aucun emploi disponible.</p>";
-    }
-    ?>
-</div>
+        ?>
 
-<?php
-if (isset($_POST['apply'])) {
-    $id_emploi = $_POST['id_emploi'];
-    $id_utilisateur = $_POST['id_utilisateur'];
-    
-    $application = new Application($pdo, null, null, null);
+        <p><?php echo $message; ?></p>
 
-    try {
-        if ($application->postulerUtilisateur($id_emploi, $id_utilisateur, "Candidature pour le poste")) {
-            $message = "Postulation réussie!";
-        } else {
-            $message = "La postulation a échoué. Veuillez réessayer.";
-        }
-   } catch (PDOException $e) {
-    $message = "Erreur MySQL : " . $e->getMessage();
-}
-
-}
-?>
-
-<p><?php echo $message; ?></p>
-
-<form method="POST">
-    <button type="submit" name="logout">Logout</button>
-</form>
-
-</div>
+        <form method="POST">
+            <button type="submit" name="logout">Logout</button>
+        </form>
+    </div>
 </body>
 </html>

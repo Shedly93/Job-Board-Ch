@@ -1,25 +1,25 @@
 <?php
 class Application {
-    private $id_emploiA;
-    private $id_utilisateurA;
+    private $id_emploi;
+    private $id_utilisateur;
     private $date_app;
     private $conn;
 
-    public function __construct($conn, $id_emploiA, $id_utilisateurA, $date_app = null){
+    public function __construct($conn, $id_emploi, $id_utilisateur, $date_app = null){
         $this->conn = $conn;
-        $this->id_emploiA = $id_emploiA;
-        $this->id_utilisateurA = $id_utilisateurA;
+        $this->id_emploi = $id_emploi;
+        $this->id_utilisateur = $id_utilisateur;
         $this->date_app = $date_app ? $date_app : date("Y-m-d H:i:s");
     }
 
-    public function getIdEmploi() { return $this->id_emploiA; }
-    public function getIdUtilisateur() { return $this->id_utilisateurA; }
+    public function getIdEmploi() { return $this->id_emploi; }
+    public function getIdUtilisateur() { return $this->id_utilisateur; }
     public function getDateApp() { return $this->date_app; }
 
 public function postulerUtilisateur($id_emploi, $id_utilisateur, $description) {
     $date_app = date("Y-m-d H:i:s");
 
-    $checkQuery = "SELECT * FROM application WHERE id_emploiA = ? AND id_utilisateurA = ?";
+    $checkQuery = "SELECT * FROM application WHERE id_emploi = ? AND id_utilisateur = ?";
     $checkStmt = $this->conn->prepare($checkQuery);
     $checkStmt->execute([$id_emploi, $id_utilisateur]);
 
@@ -27,7 +27,7 @@ public function postulerUtilisateur($id_emploi, $id_utilisateur, $description) {
         return false;
     }
 
-    $insertQuery = "INSERT INTO application (id_emploiA, id_utilisateurA, date_app) VALUES (?, ?, ?)";
+    $insertQuery = "INSERT INTO application (id_emploi, id_utilisateur, date_app) VALUES (?, ?, ?)";
     $insertStmt = $this->conn->prepare($insertQuery);
 
     $insertStmt->bindValue(1, $id_emploi, PDO::PARAM_INT);
@@ -36,31 +36,28 @@ public function postulerUtilisateur($id_emploi, $id_utilisateur, $description) {
 
     return $insertStmt->execute();
 }
-
 public function getApplicationsParEmploi($id_emploi) {
-    $query = "SELECT utilisateur.nom AS nom_utilisateur, entreprise.nom_entreprise, application.date_app, application.id_emploiA, utilisateur.description
-              FROM application
-              JOIN utilisateur ON application.id_utilisateurA = utilisateur.id_user
-              JOIN emploi ON application.id_emploiA = emploi.id_emploi
-              JOIN entreprise ON emploi.id_entreprise = entreprise.id_entreprise
-              WHERE application.id_emploiA = ?";
-    
+    $query = "SELECT * FROM vue_application_info WHERE id_emploi = ?";
     $stmt = $this->conn->prepare($query);
-    $stmt->bind_param('i', $id_emploi);
+    $stmt->bind_param("i", $id_emploi);
     $stmt->execute();
-
-    if ($stmt->errno) {
-        echo "Error executing query: " . $stmt->error;
-        exit();
-    }
 
     $result = $stmt->get_result();
 
-    $applicationsData = $result->fetch_all(MYSQLI_ASSOC);
+    if ($result === false) {
+        error_log("Error executing query: " . $stmt->error);
+        exit();
+    }
 
-   var_dump($applicationsData);
+    $applicationsData = array();
 
-    return json_encode($applicationsData);
+    while ($row = $result->fetch_assoc()) {
+        $applicationsData[] = $row;
+    }
+
+    $stmt->close();
+
+    return $applicationsData;
 }
 
 
