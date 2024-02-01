@@ -52,7 +52,10 @@ class Emploi {
 
 
  public function getEmploisParEntreprise($idEntreprise) {
-        $query = "SELECT * FROM emploi WHERE id_entreprise = ?";
+        $query = "SELECT emploi.*, entreprise.nom_entreprise
+FROM emploi
+JOIN entreprise ON emploi.id_entreprise = entreprise.id_entreprise
+WHERE emploi.id_entreprise = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param('i', $idEntreprise);
         $stmt->execute();

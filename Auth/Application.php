@@ -37,20 +37,33 @@ public function postulerUtilisateur($id_emploi, $id_utilisateur, $description) {
     return $insertStmt->execute();
 }
 
+public function getApplicationsParEmploi($id_emploi) {
+    $query = "SELECT utilisateur.nom AS nom_utilisateur, entreprise.nom_entreprise, application.date_app, utilisateur.description
+              FROM application
+              JOIN utilisateur ON application.id_utilisateurA = utilisateur.id_user
+              JOIN emploi ON application.id_emploiA = emploi.id_emploi
+              JOIN entreprise ON emploi.id_entreprise = entreprise.id_entreprise
+              WHERE application.id_emploiA = ?";
+    
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param('i', $id_emploi);
+    $stmt->execute();
 
-
-
-    public function getApplicationsParEmploi($id_emploi) {
-        $query = "SELECT * FROM application WHERE id_emploiA = ?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param('i', $id_emploi);
-        $stmt->execute();
-
-       
-        $result = $stmt->get_result();
-
-        return $result->fetch_all(MYSQLI_ASSOC);
+    if ($stmt->errno) {
+        echo "Error executing query: " . $stmt->error;
+        exit();
     }
+
+    $result = $stmt->get_result();
+
+    $applicationsData = $result->fetch_all(MYSQLI_ASSOC);
+
+   var_dump($applicationsData);
+
+    return json_encode($applicationsData);
+}
+
+
 }
 
 ?>
