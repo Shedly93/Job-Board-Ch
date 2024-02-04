@@ -1,122 +1,97 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 body {
-  font-family: Roboto, sans-serif;
-  margin: 0;
-  height: 100vh;
-  display: grid;
-  align-items: center;
-  justify-items: center;
-  background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
-      overflow: hidden;
-
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
-.card {
-    background: #fff;
-background: #fff;
+.btn-redirect {
+    cursor: pointer;
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px;
+    border: none;
     border-radius: 4px;
-    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.5);
-    max-width: 80%;
-    display: flex;
-    border-radius: 25px;
-    position: relative;
-    height: 65vh;
-    justify-content: center;
-    width: 80%;
 }
-.card h2 {
-  margin: 0;
-  padding: 0 1rem;
+
+#entreprise-card {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    height: auto;
+    padding: 20px;
 }
+
 .card .title {
-    padding: 1rem;
-    text-align: center;
-    color: rgb(22, 30, 22);
-    font-weight: bold;
-    font-size: 2rem;
-    display: flex;
-    justify-content: center;
-    gap: 3%;
-    width: 60%;
-    align-items: center;
-    position: relative;
-    left: 10%;
-    height: 7vh;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
-/* .card .prenom{
-    padding: 1rem;
-    text-align: center;
-    color: green;
-    font-weight: bold;
-    font-size: 2rem;
-} */
+
 .card .desc {
-padding: 0.5rem 1rem;
-    font-size: 1.2rem;
-}
-.card .actions {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: center;
-    padding: 0.5rem 1rem;
-    position: absolute;
-    bottom: 1rem;
-    left: 53rem;
-}
-.card svg {
-  width: 85px;
-  height: 85px;
-  margin: 0 auto;
+    margin-bottom: 5px;
+    color: #555;
 }
 
-.img-avatar {
-    width: 15%;
-    height: 40%;
-    position: absolute;
-    border-radius: 50%;
-    border: 6px solid white;
-    background-image: linear-gradient(-60deg, #16a085 0%, #f4d03f 100%);
-    top: 3%;
-    left: 1%;
+.btn-modifier {
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
 }
 
-.card-text {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.modal-content input {
     width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-.title-total {
-  padding: 2.5em 1.5em 1.5em 1.5em;
+.modal-content input[type="submit"] {
+    cursor: pointer;
+    background-color: #28a745;
+    color: #fff;
 }
 
-path {
-  fill: white;
+.close {
+    cursor: pointer;
 }
 
-.img-portada {
-  width: 100%;
+.close:hover {
+    color: #007bff;
 }
 
-.portada {
-  width: 100%;
-  height: 100%;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-background-color:blue;  
-  background-position: bottom center;
-  background-size: cover;
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
 }
 
-button {
-  border: none;
-  background: none;
-  font-size: 24px;
-  color: #8bc34a;
-  cursor: pointer;
-  transition:.5s;
-  &:hover{
-    color: #4CAF50  ;
-    transform: rotate(22deg)
-  }
+.page-title {
+    color: #333;
+    text-align: center;
 }

@@ -2,7 +2,7 @@
 require_once 'config.php';
 require_once 'entreprise.php';
 
-$nom = $_POST['nom'];
+$nom = $_POST['nom_entreprise']; 
 $adresse = $_POST['adresse'];
 $email = $_POST['email'];
 $localisation = $_POST['localisation'];

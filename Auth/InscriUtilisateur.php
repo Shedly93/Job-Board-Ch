@@ -1,35 +1,22 @@
 <?php
 require_once 'config.php';
-require_once 'utilisateur.php'; // Assuming your Utilisateur class is in utilisateur.php
+require_once 'Utilisateur.php';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = $_POST['name'];
-    $lastname = $_POST['lastname'];
-    $mail = $_POST['mail'];
+if (isset($_POST['name'], $_POST['lastname'], $_POST['mail'], $_POST['password'])) {
+    $nom = $_POST['name'];
+    $prenom = $_POST['lastname'];
+    $email = $_POST['mail'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $user = new Utilisateur(null, $name, $lastname, $mail, $password, null);
+    // La description n'est pas nécessaire ici, car elle n'est pas incluse dans le formulaire
+    $utilisateur = new Utilisateur(null, $nom, $prenom, $email, $password, null, $conn);
 
-    $sql = "INSERT INTO utilisateur (nom, prenom, email, password) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-
-    if ($stmt) {
-        $stmt->bind_param('ssss', $name, $lastname, $mail, $password);
-
-        if ($stmt->execute()) {
-            header("Location: confirmation.php?success=1");
-            exit(); // Ensure that the script terminates after redirection
-        } else {
-            echo "Erreur d'exécution de la requête : " . $stmt->error;
-        }
-
-        $stmt->close();
+    if ($utilisateur->insertIntoDatabase()) {
+        header("Location: confirmation.php?success=1");
     } else {
-        echo "Erreur de préparation de la requête : " . $conn->error;
+        echo "Erreur lors de l'insertion.";
     }
 } else {
-    // Handle non-POST requests if needed
+    echo "Veuillez fournir toutes les informations nécessaires.";
 }
-
-$conn->close();
 ?>

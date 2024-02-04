@@ -1,6 +1,7 @@
 <?php
 
-class Utilisateur {
+class Utilisateur
+{
     private $id;
     private $nom;
     private $prenom;
@@ -9,34 +10,54 @@ class Utilisateur {
     private $description;
     private $conn;
 
-    public function __construct($conn,$id, $nom, $prenom, $email, $password, $description) {
-        $this->conn = $conn;
+    public function __construct($id, $nom, $prenom, $email, $password, $description, $conn)
+    {
         $this->id = $id;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->email = $email;
         $this->password = $password;
         $this->description = $description;
+        $this->conn = $conn;
     }
 
-    public function getId() { return $this->id; }
-    public function getPrenom() { return $this->prenom; }
-    public function getEmail() { return $this->email; }
-    public function getPassword() { return $this->password; }
+    public function getId()
+    {
+        return $this->id;
+    }
 
-  public function getNom() {
-    return $this->nom;
-}
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
 
-public function getDescription() {
-    return $this->description;
-}
+    public function getEmail()
+    {
+        return $this->email;
+    }
 
-    public function __toString() {
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function __toString()
+    {
         return "Utilisateur: {$this->nom} {$this->prenom}, Email: {$this->email}";
     }
 
-    public static function getInfoFromDatabase($userId, $conn) {
+    public static function getInfoFromDatabase($userId, $conn)
+    {
         $sql = "SELECT * FROM utilisateur WHERE id_user = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $userId);
@@ -53,7 +74,8 @@ public function getDescription() {
                 $userData['prenom'],
                 $userData['email'],
                 $userData['password'],
-                $userData['description']
+                $userData['description'],
+                $conn
             );
 
             return $user;
@@ -63,43 +85,19 @@ public function getDescription() {
         }
     }
 
-     public function getNomUtilisateurFromDatabase($id_user, $conn) {
-        $sql = "SELECT nom FROM utilisateur WHERE id_user = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $id_user);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    public function insertIntoDatabase()
+    {
+        $sql = "INSERT INTO utilisateur (nom, prenom, email, password, description) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        
+        $description = isset($this->description) ? $this->description : null;
+
+        $stmt->bind_param("sssss", $this->nom, $this->prenom, $this->email, $this->password, $description);
+        $success = $stmt->execute();
         $stmt->close();
 
-        if ($result->num_rows > 0) {
-            $entrepriseData = $result->fetch_assoc();
-            return $entrepriseData['nom'];
-        } else {
-            return null;
-        }
-    }
-   public function getNomUtilisateur() {
-        
-        return $this->getNomUtilisateurFromDatabase($this->id, $this->conn);
-    }
-    
-public function getprenomUtilisateurFromDatabase($id_user, $conn) {
-    $sql = "SELECT prenom FROM utilisateur WHERE id_user = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id_user);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $stmt->close();
-
-    if ($result->num_rows > 0) {
-        $userData = $result->fetch_assoc();
-        return $userData['prenom'];
-    } else {
-        return null;
-    }
-}
-    public function getprenomUtilisateur() {
-        return $this->getprenomUtilisateurFromDatabase($this->id, $this->conn);
+        return $success;
     }
 }
 ?>
+

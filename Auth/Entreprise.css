@@ -1,69 +1,108 @@
-/* body {
+        body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
 }
-.container-gestionUser{
-    width: 100%;
-    overflow: hidden;
-    height: 97vh;
-    display: flex;
-}
 
-h2 {
+.page-title {
     color: #333;
+    text-align: center;
 }
 
-form {
+.container-gestionUser {
+    max-width: 100%;
+    width: 95%;
+    margin: 20px auto;
     background-color: #fff;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    width: 35%;
-    position: relative;
-    left: 0rem;
+    display: flex;
+    gap: 3%;
+    overflow: hidden;
+    height: 82vh;
 }
 
-form label {
+.form-submit{
+    width: 25%;
+}
+.list-emploi{
+        display: flex;
+    width: 72%;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+}
+
+.emploi-form,
+.emploi-update-form,
+.emploi-delete-form {
+    margin-bottom: 20px;
+}
+
+.form-label {
     display: block;
     margin-bottom: 5px;
 }
 
-form input,
-form textarea {
+.form-input,
+.form-textarea,
+.form-button {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
     box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-form button {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
+.form-textarea {
+    resize: vertical;
 }
-.list-emploi{
-        display: flex;
-    flex-direction: column;
-    width: 65%;
-}
+
 .job-card {
     background-color: #fff;
     border: 1px solid #ddd;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-    width: 45%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    height: 35vh;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
 }
 
-Add any additional styles as needed */
+.emploi-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.entreprise-name {
+    font-weight: bold;
+    color: #555;
+}
+
+.emploi-description,
+.emploi-salaire,
+.emploi-contrat,
+.emploi-date-post {
+    margin-bottom: 5px;
+}
+.pos-bouton{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: #fff;
+}

@@ -33,12 +33,10 @@ if (isset($_SESSION['user_id'])) {
             $emploi->updateEmploi($idEmploiToUpdate, $titre, $description, $salaire, $contrat);
         }
 
-        if (isset($_POST['deleteEmploi'])) {
-            $idEmploiToDelete = $_POST['idEmploiToDelete'];
-            $emploi->deleteEmploi($idEmploiToDelete);
-        }
-
-
+if (isset($_POST['deleteEmploi'])) {
+    $idEmploiToDelete = $_POST['id_emploi'];
+    $emploi->deleteEmploi($idEmploiToDelete);
+}
 
 $emploisEntreprise = $emploi->getEmploisParEntreprise($entreprise_info->getId());
 
@@ -61,56 +59,163 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Emplois</title>
-    <link rel="stylesheet" href="Entreprise.css">
-        
+    <!-- <link rel="stylesheet" href="Entreprise.css"> -->
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.page-title {
+    color: #333;
+    text-align: center;
+}
+
+.container-gestionUser {
+    max-width: 100%;
+    width: 95%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 3%;
+    overflow: hidden;
+    height: 82vh;
+}
+
+.form-submit{
+    width: 25%;
+}
+.list-emploi{
+        display: flex;
+    width: 72%;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+}
+
+.emploi-form,
+.emploi-update-form,
+.emploi-delete-form {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-input,
+.form-textarea,
+.form-button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-textarea {
+    resize: vertical;
+}
+
+.job-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.emploi-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.entreprise-name {
+    font-weight: bold;
+    color: #555;
+}
+
+.emploi-description,
+.emploi-salaire,
+.emploi-contrat,
+.emploi-date-post {
+    margin-bottom: 5px;
+}
+.pos-bouton{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+    </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h2>Liste des emplois entreprise</h2>
+    <h2 class="page-title">Liste des emplois entreprise</h2>
     
     <div class="container-gestionUser">
-        <form method="POST" action="">
-            <input type="hidden" name="idEntreprise" value="<?= $entreprise_info->getId(); ?>">
-            <label for="titre">Titre:</label>
-            <input type="text" name="titre" required>
-            <label for="description">Description:</label>
-            <textarea name="description" required></textarea>
-            <label for="salaire">Salaire:</label>
-            <input type="text" name="salaire" required>
-            <label for="contrat">Contrat:</label>
-            <input type="text" name="contrat" required>
-            <input type="hidden" name="idEmploi" value="<?= isset($_POST['idEmploi']) ? $_POST['idEmploi'] : ''; ?>">
-            <button type="submit" name="postEmploi">Poster l'emploi</button>
+    <div class="form-submit">    
+    <form method="POST" action="" class="emploi-form">
+            <input type="hidden" name="idEntreprise" value="<?= $entreprise_info->getId(); ?>" class="entreprise-id">
+            <label for="titre" class="form-label">Titre:</label>
+            <input type="text" name="titre" required class="form-input">
+            <label for="description" class="form-label">Description:</label>
+            <textarea name="description" required class="form-textarea"></textarea>
+            <label for="salaire" class="form-label">Salaire:</label>
+            <input type="text" name="salaire" required class="form-input">
+            <label for="contrat" class="form-label">Contrat:</label>
+            <input type="text" name="contrat" required class="form-input">
+            <input type="hidden" name="idEmploi" value="<?= isset($_POST['idEmploi']) ? $_POST['idEmploi'] : ''; ?>" class="emploi-id">
+            <button type="submit" name="postEmploi" class="form-button">Poster l'emploi</button>
         </form>
-
+    </div>
         <div class="list-emploi">
             <?php foreach ($emploisEntreprise as $emploi) : ?>
                 <div class="job-card">
-                    <h3><?= $emploi['titre']; ?></h3>
-                                <p>Nom de l'entreprise: <?= $emploi['nom_entreprise']; ?></p>
-                    <p><?= $emploi['description']; ?></p>
-                    <p>Salaire: <?= $emploi['salaire']; ?></p>
-                    <p>Contrat: <?= $emploi['contrat']; ?></p>
-                    <p>date post: <?= $emploi['date_post']; ?></p>
- 
-<!-- Bouton "Modifier l'emploi" -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emploiModal<?= $emploi['id_emploi']; ?>" onclick="logIdEmploi(<?= $emploi['id_emploi']; ?>)">
-    Modifier l'emploi
-</button>
-                    <button type="button" class="btn btn-danger" onclick="confirmDelete(<?= $emploi['id_emploi']; ?>)">
-                        Supprimer l'emploi
+                    <h3 class="emploi-title"><?= $emploi['titre']; ?></h3>
+                    <p class="entreprise-name">Nom de l'entreprise: <?= $emploi['nom_entreprise']; ?></p>
+                    <p class="emploi-description"><?= $emploi['description']; ?></p>
+                    <p class="emploi-salaire">Salaire: <?= $emploi['salaire']; ?></p>
+                    <p class="emploi-contrat">Contrat: <?= $emploi['contrat']; ?></p>
+                    <p class="emploi-date-post">Date post: <?= $emploi['date_post']; ?></p>
+
+                    <div class="pos-bouton">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emploiModal<?= $emploi['id_emploi']; ?>" onclick="logIdEmploi(<?= $emploi['id_emploi']; ?>)">
+                        Modifier l'emploi
                     </button>
+<button type="button" class="btn btn-danger" onclick="confirmDelete(<?= $emploi['id_emploi']; ?>)">
+    Supprimer l'emploi
+</button>
 
-<!-- Bouton "Postuler" -->
-<a href="PostulerUser.php?id_emploi=<?= $emploi['id_emploi']; ?>" class="btn btn-success" onclick="logIdEmploi(<?= $emploi['id_emploi']; ?>)">
-    Postuler
-</a>
+                    <a href="PostulerUser.php?id_emploi=<?= $emploi['id_emploi']; ?>" class="btn btn-success" onclick="logIdEmploi(<?= $emploi['id_emploi']; ?>">
+                        Postuler
+                    </a>
+                    </div>
 
-
-
-
-
-<div class="modal" tabindex="-1" role="dialog" id="emploiModal<?= $emploi['id_emploi']; ?>">
+                    <div class="modal" tabindex="-1" role="dialog" id="emploiModal<?= $emploi['id_emploi']; ?>">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -120,74 +225,53 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="POST" action="">
-                                        <input type="hidden" name="idEmploi" value="<?= $emploi['id_emploi']; ?>">
-                                        <label for="titre">Titre:</label>
-                                        <input type="text" name="titre" value="<?= $emploi['titre']; ?>" required>
-                                        <label for="description">Description:</label>
-                                        <textarea name="description" required><?= $emploi['description']; ?></textarea>
-                                        <label for="salaire">Salaire:</label>
-                                        <input type="text" name="salaire" value="<?= $emploi['salaire']; ?>" required>
-                                        <label for="contrat">Contrat:</label>
-                                        <input type="text" name="contrat" value="<?= $emploi['contrat']; ?>" required>
-                                        <button type="submit" name="updateEmploi">Modifier</button>
+                                    <form method="POST" action="" class="emploi-update-form">
+                                        <input type="hidden" name="idEmploi" value="<?= $emploi['id_emploi']; ?>" class="emploi-id">
+                                        <label for="titre" class="form-label">Titre:</label>
+                                        <input type="text" name="titre" value="<?= $emploi['titre']; ?>" required class="form-input">
+                                        <label for="description" class="form-label">Description:</label>
+                                        <textarea name="description" required class="form-textarea"><?= $emploi['description']; ?></textarea>
+                                        <label for="salaire" class="form-label">Salaire:</label>
+                                        <input type="text" name="salaire" value="<?= $emploi['salaire']; ?>" required class="form-input">
+                                        <label for="contrat" class="form-label">Contrat:</label>
+                                        <input type="text" name="contrat" value="<?= $emploi['contrat']; ?>" required class="form-input">
+                                        <button type="submit" name="updateEmploi" class="form-button">Modifier</button>
                                     </form>
                                 </div>
-                                <form method="POST" action="" name="deleteForm<?= $emploi['id_emploi']; ?>">
-                                    <input type="hidden" name="idEmploiToDelete" value="">
+                                <form method="POST" action="" name="deleteForm<?= $emploi['id_emploi']; ?>" class="emploi-delete-form">
+                                    <input type="hidden" name="idEmploiToDelete" value="" class="emploi-id-to-delete">
                                 </form>
                             </div>
                         </div>
                     </div>
-
-   
-
                 </div>
             <?php endforeach; ?>
         </div>
-
-
-
-      
     </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <script>
-       function logIdEmploi(idEmploi) {
-    console.log('ID Emploi cliqué:', idEmploi);
+<script>
+    function logIdEmploi(idEmploi) {
+        console.log('ID Emploi cliqué:', idEmploi);
 
-    // Stocker l'ID de l'emploi dans le localStorage
-    localStorage.setItem('id_emploi', idEmploi);
-
+        // Stocker l'ID de l'emploi dans le localStorage
+        localStorage.setItem('id_emploi', idEmploi);
+    }
+function confirmDelete(idEmploi) {
+    if (confirm("Êtes-vous sûr de vouloir supprimer cet emploi?")) {
+        submitDeleteForm(idEmploi);
+    }
 }
 
-        function confirmDelete(idEmploi) {
-            if (confirm("Êtes-vous sûr de vouloir supprimer cet emploi?")) {
-                document.querySelector('input[name="idEmploiToDelete"]').value = idEmploi;
-                document.querySelector('form[name="deleteForm' + idEmploi + '"]').submit();
-            }
-        }
-  
+function submitDeleteForm(idEmploi) {
+    document.querySelector('.emploi-id-to-delete').value = idEmploi;
+    document.querySelector('.emploi-delete-form').submit();
+}
 
-</script>
 
-<script>
-    function postuler(idEmploi) {
-        $.ajax({
-            type: "POST",
-            url: "PostulerUser.php",
-            data: { postuler: true },
-            success: function(response) {
-                alert(response); // Affiche la réponse du serveur
-            },
-            error: function(error) {
-                console.error("Erreur lors de l'envoi de la postulation:", error);
-            }
-        });
-    }
 </script>
 
 </body>

@@ -31,10 +31,6 @@ class Emploi {
 
 
 
-// ...
-
-
-
  public function postEmploi($idEntreprise, $titre, $description, $salaire, $contrat)
 {
     $datePost = date("Y-m-d H:i:s");
@@ -78,13 +74,19 @@ public function updateEmploi($idEmploi, $titre, $description, $salaire, $contrat
     return $stmt->execute();
 }
 
-  public function deleteEmploi($idEmploi) {
-        $query = "DELETE FROM emploi WHERE id_emploi=?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param('i', $idEmploi);
-        return $stmt->execute();
-    }
+public function deleteEmploi($idEmploi) {
+    $query = "DELETE FROM emploi WHERE id_emploi=?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param('i', $idEmploi);
     
+    if ($stmt->execute()) {
+        return true;
+    } else {
+        echo "Erreur MySQL lors de la suppression : " . $stmt->error;
+        return false;
+    }
+}
+
     public function getInfoFromDatabase($conn) {
     $sql = "SELECT * FROM emploi WHERE id_emploi = ?";
     $stmt = $conn->prepare($sql);

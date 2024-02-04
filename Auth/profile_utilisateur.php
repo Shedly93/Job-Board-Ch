@@ -34,29 +34,167 @@ if (isset($_SESSION['user_id'])) {
     <title>Profil Utilisateur</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="modal.css">
+   <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+.profile-container{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    background: #6f6f6f0f;
+    border-radius: 15px;
+}
+
+.profile-page{
+    width: 100%;
+    background: #f3f2f2;
+    height: 97vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    justify-content: center;
+    align-items: center;
+} 
+
+.btn-redirect {
+    cursor: pointer;
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+}
+
+#entreprise-card {
+    max-width: 100%;
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.card-text {
+    font-size: xx-large;
+    margin-bottom: 10px;
+}
+
+.card .desc {
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.btn-modifier {
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.modal-content input[type="submit"] {
+    cursor: pointer;
+    background-color: #28a745;
+    color: #fff;
+}
+
+.close {
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #007bff;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.page-title {
+    color: #333;
+    text-align: center;
+}
+.act-emploi{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+}
+.btn-envoie-emploi{
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+    </style>
 </head>
 <body>
-    <button onclick="redirectToGestionEmplois()"><i class="fas fa-search"></i> Recherche Emploi</button>
+<div class="profile-page">
+    <div class="act-emploi">
+    <button class="btn-envoie-emploi" onclick="redirectToGestionEmplois()"> Recherche Emploi</button>
+       </div>
+           <div class="profile-container">
     <div class="card">
-        <div class="img-avatar">
-        </div>
+        <div class="img-avatar"> </div>
         <div class="card-text">
-            <div class="portada">
-            </div>
+            <div class="portada"> </div>
             <div class="title-total">   
-
-                <div class="title"> <?= $user_info->getNom() ?>  <?= $user_info->getPrenom() ?></div>
-               
+                <div class="title">Nom : <?= $user_info->getNom() ?> Prenom : <?= $user_info->getPrenom() ?></div>
                 <div class="desc">Email :<?= $user_info->getEmail() ?></div>
                 <div class="desc">description :<?= $user_info->getDescription() ?></div>
                <div class="actions">
-    <button><i class="far fa-heart"></i></button>
-    <button><i class="far fa-envelope"></i></button>
-    <button id="openModalBtn"><i class="fas fa-user-edit"></i> Modifier</button>
+    <button id="openModalBtn" class="btn-modifier"></i> Modifier</button>
 </div>
             </div>
         </div>
     </div>
+           </div>
+</div>
 
     <div id="myModal" class="modal">
         <div class="modal-content">
