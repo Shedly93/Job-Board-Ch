@@ -37,8 +37,14 @@ public function postulerUtilisateur($id_emploi, $id_utilisateur, $description) {
     return $insertStmt->execute();
 }
 public function getApplicationsParEmploi($id_emploi) {
-    $query = "SELECT * FROM vue_application_info WHERE id_emploi = ?";
+    $query = "SELECT id_emploi, id_user FROM vue_application_info WHERE id_emploi = ?";
     $stmt = $this->conn->prepare($query);
+
+    if (!$stmt) {
+        error_log("Error preparing query: " . $this->conn->error);
+        exit();
+    }
+
     $stmt->bind_param("i", $id_emploi);
     $stmt->execute();
 
@@ -59,6 +65,8 @@ public function getApplicationsParEmploi($id_emploi) {
 
     return $applicationsData;
 }
+
+
 
 
 }

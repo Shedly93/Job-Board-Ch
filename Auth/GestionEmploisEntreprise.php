@@ -206,10 +206,9 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emploiModal<?= $emploi['id_emploi']; ?>" onclick="logIdEmploi(<?= $emploi['id_emploi']; ?>)">
                         Modifier l'emploi
                     </button>
-<button type="button" class="btn btn-danger" onclick="confirmDelete(<?= $emploi['id_emploi']; ?>)">
+<button type="button" class="btn btn-danger" onclick="submitDeleteForm(<?= $emploi['id_emploi']; ?>)">
     Supprimer l'emploi
 </button>
-
                     <a href="PostulerUser.php?id_emploi=<?= $emploi['id_emploi']; ?>" class="btn btn-success" onclick="logIdEmploi(<?= $emploi['id_emploi']; ?>">
                         Postuler
                     </a>
@@ -257,7 +256,6 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
     function logIdEmploi(idEmploi) {
         console.log('ID Emploi cliqué:', idEmploi);
 
-        // Stocker l'ID de l'emploi dans le localStorage
         localStorage.setItem('id_emploi', idEmploi);
     }
 function confirmDelete(idEmploi) {
@@ -267,9 +265,44 @@ function confirmDelete(idEmploi) {
 }
 
 function submitDeleteForm(idEmploi) {
-    document.querySelector('.emploi-id-to-delete').value = idEmploi;
-    document.querySelector('.emploi-delete-form').submit();
+    // Ask for confirmation
+    var confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cet emploi?");
+
+    // If confirmed, proceed with deletion
+    if (confirmDelete) {
+        try {
+            // Set the value in the correct form
+            document.querySelector('.emploi-id-to-delete').value = idEmploi;
+
+            // Fetch API to submit the form asynchronously
+            fetch(document.querySelector('.emploi-delete-form').action, {
+                method: 'POST',
+                body: new FormData(document.querySelector('.emploi-delete-form')),
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Success message
+                    alert('Suppression réussie');
+                } else {
+                    // Error message
+                    alert('Erreur lors de la suppression: ' + response.statusText);
+                }
+            })
+            .catch(error => {
+                // Catch any network or other errors
+                alert('Erreur lors de la suppression: ' + error.message);
+            });
+        } catch (error) {
+            // Display an alert with the error message
+            alert('Erreur lors de la suppression: ' + error.message);
+        }
+    } else {
+        // User canceled the delete action
+        alert('Suppression annulée');
+    }
 }
+
+
 
 
 </script>

@@ -97,15 +97,90 @@ if (isset($_SESSION['user_id'])) {
     justify-content: flex-start;
 }
 
+.card {
+    width: 85%;
+    /* margin: 20px auto; */
+   background: azure;
+    /* box-shadow: 0px 0px 10px gray; */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 85%;
+}
+
 .card-text {
-    font-size: xx-large;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    height: 90%;
+    width: 95%;
+    background:transparent;
+    
+}
+
+.left-side, .right-side {
+    flex: 1;
+}
+
+.title, .desc {
+    margin-bottom: 15px;
+}
+
+.title label, .desc label {
+    font-weight: bold;
+    color: #333;
+}
+
+.btn-modifier {
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-modifier:hover {
+    background-color: #0056b3;
+}
+
+.right-side {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+.card .title {
+    font-size: 26px;
     margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    gap: 5%;
+    padding: 15px;
 }
 
 .card .desc {
     margin-bottom: 5px;
     color: #555;
+    font-size: 27px;
+    padding: 10px;
 }
+
+.right-side .desc span {
+    color: #555;
+}
+
+.right-side .actions {
+    text-align: right;
+}
+
+.right-side .actions .btn-modifier {
+    margin-top: 10px;
+}
+
+
 
 .btn-modifier {
     cursor: pointer;
@@ -182,6 +257,7 @@ if (isset($_SESSION['user_id'])) {
     border-radius: 4px;
     cursor: pointer;
 }
+
     </style>
 </head>
 <body>
@@ -215,17 +291,20 @@ if (isset($_SESSION['user_id'])) {
     </div>
     <div class="profile-container">
     <div class="card" id="entreprise-card">
-        <div class="img-avatar"></div>
         <div class="card-text">
-            <div class="portada"></div>
+                        <div class="left-side">
             <div class="title-total">
                 <div class="title" id="entreprise-nom"><?= $entreprise_info->getNom() ?></div>
+                        </div>
+                        </div>
+                           <div class="right-side">
                 <div class="desc">Adresse : <span id="entreprise-adresse"><?= $entreprise_info->getAdresse() ?></span></div>
                 <div class="desc">Email : <span id="entreprise-email"><?= $entreprise_info->getEmail() ?></span></div>
                 <div class="desc">Localisation : <span id="entreprise-localisation"><?= $entreprise_info->getLocalisation() ?></span></div>
                 <div class="desc">Domaine : <span id="entreprise-domaine"><?= $entreprise_info->getDomaine() ?></span></div>
                 <button id="openModalBtn" class="btn-modifier" onclick="openModalWithData('<?= $entreprise_info->getId() ?>', '<?= $entreprise_info->getNom() ?>', '<?= $entreprise_info->getAdresse() ?>', '<?= $entreprise_info->getEmail() ?>', '<?= $entreprise_info->getLocalisation() ?>', '<?= $entreprise_info->getDomaine() ?>')">Modifier</button>
                 <!-- <button class="btn-supprimer" onclick="deleteEntreprise(<?= $entreprise_info->getId() ?>)">Supprimer</button> -->
+                           </div>
             </div>
         </div>
     </div>

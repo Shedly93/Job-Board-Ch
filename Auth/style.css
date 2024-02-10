@@ -27,7 +27,11 @@ body {
 
 .card .title {
     font-size: 24px;
-    margin-bottom: 10px;
+    height: 100%;
+    display: flex;
+    width: 88%;
+    flex-direction: column;
+    padding: 15px;
 }
 
 .card .desc {
@@ -94,4 +98,14 @@ body {
 .page-title {
     color: #333;
     text-align: center;
+}
+
+
+.card {
+    width: 95%;
+    height: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: cadetblue;
 }

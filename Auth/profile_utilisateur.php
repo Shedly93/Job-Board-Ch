@@ -86,15 +86,90 @@ if (isset($_SESSION['user_id'])) {
     justify-content: flex-start;
 }
 
+.card {
+    width: 85%;
+    /* margin: 20px auto; */
+   background: azure;
+    /* box-shadow: 0px 0px 10px gray; */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 85%;
+}
+
 .card-text {
-    font-size: xx-large;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    height: 90%;
+    width: 95%;
+    background:transparent;
+    
+}
+
+.left-side, .right-side {
+    flex: 1;
+}
+
+.title, .desc {
+    margin-bottom: 15px;
+}
+
+.title label, .desc label {
+    font-weight: bold;
+    color: #333;
+}
+
+.btn-modifier {
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-modifier:hover {
+    background-color: #0056b3;
+}
+
+.right-side {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+.card .title {
+    font-size: 26px;
     margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    gap: 5%;
+    padding: 15px;
 }
 
 .card .desc {
     margin-bottom: 5px;
     color: #555;
+    font-size: 27px;
+    padding: 10px;
 }
+
+.right-side .desc span {
+    color: #555;
+}
+
+.right-side .actions {
+    text-align: right;
+}
+
+.right-side .actions .btn-modifier {
+    margin-top: 10px;
+}
+
+
 
 .btn-modifier {
     cursor: pointer;
@@ -171,6 +246,7 @@ if (isset($_SESSION['user_id'])) {
     border-radius: 4px;
     cursor: pointer;
 }
+
     </style>
 </head>
 <body>
@@ -179,22 +255,40 @@ if (isset($_SESSION['user_id'])) {
     <button class="btn-envoie-emploi" onclick="redirectToGestionEmplois()"> Recherche Emploi</button>
        </div>
            <div class="profile-container">
-    <div class="card">
-        <div class="img-avatar"> </div>
-        <div class="card-text">
-            <div class="portada"> </div>
-            <div class="title-total">   
-                <div class="title">Nom : <?= $user_info->getNom() ?> Prenom : <?= $user_info->getPrenom() ?></div>
-                <div class="desc">Email :<?= $user_info->getEmail() ?></div>
-                <div class="desc">description :<?= $user_info->getDescription() ?></div>
-               <div class="actions">
-    <button id="openModalBtn" class="btn-modifier"></i> Modifier</button>
-</div>
+<div class="card">
+    <div class="card-text">
+        <div class="left-side">
+            <div class="title">
+                <div>
+                <label for="nom">Nom :</label> 
+                <span id="nom"><?= $user_info->getNom() ?></span> <!-- Contenu affiché -->
+                </div>
+                <br/>
+                <div>
+                <label for="prenom">Prénom :</label>
+                <span id="prenom"><?= $user_info->getPrenom() ?></span> <!-- Contenu affiché -->
+                </div>
+            </div>
+        </div>
+        <div class="right-side"> <!-- Correction de la classe right-side -->
+            <div class="desc">
+                <label for="email">Email :</label> <br/>
+                <span id="email"><?= $user_info->getEmail() ?></span> <!-- Contenu affiché -->
+            </div>
+            <div class="desc">
+                <label for="description">Description :</label> <br/>
+                <span id="description"><?= $user_info->getDescription() ?></span> <!-- Contenu affiché -->
+            </div>
+            <div class="actions">
+                <button id="openModalBtn" class="btn-modifier">Modifier</button>
             </div>
         </div>
     </div>
-           </div>
 </div>
+
+    </div>
+           </div>
+
 
     <div id="myModal" class="modal">
         <div class="modal-content">
@@ -210,7 +304,7 @@ if (isset($_SESSION['user_id'])) {
                 <input type='email' name='newEmail' value='<?= $user_info->getEmail() ?>'><br>
 
                 <label for='newDescription'>Nouvelle Description:</label>
-                <textarea name='newDescription'><?= $user_info->getDescription() ?></textarea><br>
+                <textarea name='newDescription' ><?= $user_info->getDescription() ?></textarea><br>
 
                 <input type='submit' name='update' value='Modifier'>
             </form>
