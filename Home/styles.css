@@ -343,7 +343,7 @@ ul li a:hover::after {
   }
   
   .footer-social-amoeba-path {
-	  fill: #027b9a;
+	  fill: #282e35e8;
   }
   
   .footer-social-link.linkedin {
@@ -404,10 +404,10 @@ ul li a:hover::after {
   }
   
   .footer-copyright {
-	  background-color: #027b9a;
-	  color: #fff;
-	  padding: 15px 30px;
-	text-align: center;
+	background-color: #282e35e8;
+    color: #fff;
+    padding: 15px 30px;
+    text-align: center;
   }
   
   .footer-copyright-wrapper {
