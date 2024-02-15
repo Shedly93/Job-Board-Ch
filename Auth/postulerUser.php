@@ -85,7 +85,6 @@ if (isset($_POST['accepter']) || isset($_POST['refuser'])) {
                 $mail = new PHPMailer(true);
 
                 try {
-                    //Server settings
                     $mail->SMTPDebug = 0;                     
                     $mail->isSMTP();                         
                     $mail->Host       = 'smtp.example.com';  
@@ -95,11 +94,9 @@ if (isset($_POST['accepter']) || isset($_POST['refuser'])) {
                     $mail->SMTPSecure = 'tls';                                  
                     $mail->Port       = 587;                                    
 
-                    //Recipients
                     $mail->setFrom('chediouerghi8@gmail.com', 'chedi');
                     $mail->addAddress($user_email);     
 
-                    //Content
                     $mail->isHTML(true);                                  
                     $mail->Subject = $subject;
                     $mail->Body    = $message;
