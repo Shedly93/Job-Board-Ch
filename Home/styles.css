@@ -319,7 +319,7 @@ display: flex;
 
 .dropdown {
   float: left;
-  overflow: hidden;
+  overflow: auto !important;
 }
 
 .dropdown .dropbtn {

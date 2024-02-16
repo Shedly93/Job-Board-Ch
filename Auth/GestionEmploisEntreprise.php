@@ -41,7 +41,8 @@ if (isset($_POST['deleteEmploi'])) {
 $emploisEntreprise = $emploi->getEmploisParEntreprise($entreprise_info->getId());
 
 
-   echo "ID de l'entreprise : " . $entreprise_info->getId();
+
+//    echo "ID de l'entreprise : " . $entreprise_info->getId();
 } else {
     echo "Erreur : Impossible d'obtenir les informations de l'entreprise.";
 }
@@ -59,8 +60,8 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Emplois</title>
-    <!-- <link rel="stylesheet" href="Entreprise.css"> -->
     <style>
+        
         body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -171,9 +172,34 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
 }
 
     </style>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost:8080/Job-Board-Ch/Home/styles.css">
 </head>
 <body>
+    <div style="overflow: hidden; width: 100%; position: absolute;">
+
+       <nav>
+<img src="http://localhost:8080/Job-Board-Ch/Home/Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
+            <ul>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="../Auth//GestionEmploisutilisateur.php">Offres d'emploi</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="../Auth//login.html">Login</a></li>
+            </ul>
+            
+<div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" .dropdown id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+            Register  
+      <i class="fa fa-caret-down"></i>
+    </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <button class="dropdown-item" href="../Auth/InscriUtilisateur.html">Utilisateur</button>
+      <button class="dropdown-item" href="../Auth//inscriEntreprise.html">Entreprise</button>
+    </div>
+  </div> 
+
+        </nav>
     <h2 class="page-title">Liste des emplois entreprise</h2>
     
     <div class="container-gestionUser">
@@ -247,7 +273,7 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
             <?php endforeach; ?>
         </div>
     </div>
-
+    </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

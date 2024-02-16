@@ -14,7 +14,7 @@ $message = "";
 try {
     $pdo = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connexion réussie à la base de données.";
+    // echo "Connexion réussie à la base de données.";
 
     $emploi = new Emploi($pdo, null, null, null, null, null, null, null);
     $filtreEmploi = new FiltreEmploi($pdo);
@@ -187,8 +187,32 @@ input[type="text"] {
     right: 10%;
 }
     </style>
+<link rel="stylesheet" href="http://localhost:8080/Job-Board-Ch/Home/styles.css">
+</head>
+    
 </head>
 <body>
+<div style="overflow: hidden; width: 100%; position: absolute;">
+       <nav>
+<img src="http://localhost:8080/Job-Board-Ch/Home/Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
+            <ul>
+                <li><a href="../../Home/index.html">Accueil</a></li>
+                <li><a href="../Auth//GestionEmploisutilisateur.php">Offres d'emploi</a></li>
+                <li><a href="../..//Home/contact.html">Contact</a></li>
+                <li><a href="../Auth//login.html">Login</a></li>
+            </ul>
+            
+            <div class="dropdown">
+    <button class="dropbtn">Register  
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="../Auth/InscriUtilisateur.html">Utilisateur</a>
+      <a href="../Auth//inscriEntreprise.html">Entreprise</a>
+    </div>
+  </div> 
+
+        </nav>
     <div class="container">
         <div class="top_barre">
         <h1 class="container-title-user"><b>List Des Emplois</b></h1>
@@ -253,6 +277,7 @@ input[type="text"] {
         ?>
         <p><?php echo $message; ?></p>
       
+    </div>
     </div>
 </body>
 </html>
