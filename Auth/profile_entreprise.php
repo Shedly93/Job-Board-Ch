@@ -357,6 +357,6 @@ if (isset($_SESSION['user_id'])) {
 
 <?php
 if (!$entreprise_info) {
-    echo "Erreur lors de la récupération des informations de l'entreprise.";
+    // echo "Erreur lors de la récupération des informations de l'entreprise.";
 }
 ?>
