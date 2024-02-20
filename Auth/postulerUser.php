@@ -82,6 +82,17 @@ if (isset($_POST['accepter']) || isset($_POST['refuser'])) {
         if ($utilisateur) {
             $user_email = $utilisateur->getEmail();
 
+            $emploi = new Emploi($conn, $id_emploi); 
+            $id_entreprise = $emploi->getIdEntreprise();
+
+            $entreprise = Entreprise::getInfoFromDatabase($id_entreprise, $conn);
+            if ($entreprise) {
+                $entreprise_email = $entreprise->getEmail();
+                $smtp_host = $entreprise->getSmtpHost();
+                $smtp_username = $entreprise->getSmtpUsername();
+                $smtp_password = $entreprise->getSmtpPassword();
+            }
+
             if (isset($_POST['accepter'])) {
                 $subject = "Votre candidature a été acceptée";
                 $message = "Merci de postuler! Votre candidature a été acceptée.";
@@ -94,14 +105,14 @@ if (isset($_POST['accepter']) || isset($_POST['refuser'])) {
                 try {
                     $mail->SMTPDebug = 0;
                     $mail->isSMTP();
-                    $mail->Host       = 'smtp.example.com';
+                    $mail->Host       = $smtp_host;
                     $mail->SMTPAuth   = true;
-                    $mail->Username   = 'test@test.com';
-                    $mail->Password   = 'test';
+                    $mail->Username   = $smtp_username;
+                    $mail->Password   = $smtp_password;
                     $mail->SMTPSecure = 'tls';
                     $mail->Port       = 587;
 
-                    $mail->setFrom('chediouerghi8@gmail.com', 'chedi');
+                    $mail->setFrom($entreprise_email, 'Nom de votre entreprise');
                     $mail->addAddress($user_email);
 
                     $mail->isHTML(true);
@@ -109,9 +120,9 @@ if (isset($_POST['accepter']) || isset($_POST['refuser'])) {
                     $mail->Body    = $message;
 
                     $mail->send();
-                    echo "Email sent successfully.";
+                    echo "Email envoyé avec succès.";
                 } catch (Exception $e) {
-                    echo "Error sending email: {$mail->ErrorInfo}";
+                    echo "Erreur lors de l'envoi de l'email : {$mail->ErrorInfo}";
                 }
             }
         } else {
@@ -121,164 +132,14 @@ if (isset($_POST['accepter']) || isset($_POST['refuser'])) {
         echo "ID de l'utilisateur ou ID de l'emploi non trouvé dans la requête POST.<br>";
     }
 }
+
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-
-        .forme-ac-ref{
-    width: 40%;
-    height: 5vh;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    position: absolute;
-    bottom: 5%;
-    right: 0;
-}
-
-        body {
-  background-color: black;
-}
-
-.container--cards {
-    width: 100%;
-    height: 97vh;
-    background: linear-gradient(170deg, #080509, #1a171c, #080509);
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-.gradient-cards {
-display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
-    height: 100%;
-}
-
-.container-title {
-  text-align: center;
-  padding: 0 !important;
-  margin-bottom: 40px;
-  font-size: 40px;
-  color: #fff;
-  font-weight: 600;
-  line-height: 60px;
-}
-
-.card {
-    max-width: 25%;
-    border: 0;
-    width: 100%;
-    height: 55vh;
-}
-
-.container-card {
-position: relative !important;
-    border: 2px solid transparent;
-    background: linear-gradient(71deg, #080509, #1a171c, #080509);
-    background-clip: padding-box;
-    border-radius: 45px;
-    padding: 40px;
-    height: 75%;
-    width: 84%;
-    color: white;
-    font-size: x-large;
-    white-space: pre-line;
-}
-       .user-info {
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .user-description {
-            margin-bottom: 10px;
-        }
-
-        .action-buttons {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .action-buttons button {
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .accept-button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-        }
-
-        .reject-button {
-            background-color: #f44336;
-            color: white;
-            border: none;
-        }
-
-.bg-green-box,
-.bg-white-box,
-.bg-yellow-box,
-.bg-blue-box {
-  position: relative;
-}
-
-.bg-green-box::after,
-.bg-white-box::after,
-.bg-yellow-box::after,
-.bg-blue-box::after {
-  position: absolute;
-  top: -1px;
-  bottom: -1px;
-  left: -1px;
-  right: -1px;
-  content: "";
-  z-index: -1;
-  border-radius: 45px;
-}
-
-.bg-green-box::after {
-  background: linear-gradient(71deg, #0d1212, #3da077, #0d1212);
-}
-
-.bg-white-box::after {
-  background: linear-gradient(71deg, #121013, #b0afb0, #121013);
-}
-
-.bg-yellow-box::after {
-  background: linear-gradient(71deg, #110e0e, #afa220, #110e0e);
-}
-
-.bg-blue-box::after {
-  background: linear-gradient(71deg, #0c0a0e, #5f6fad, #0c0a0e);
-}
-
-.card-title {
-  font-weight: 600;
-  color: white;
-  letter-spacing: -0.02em;
-  line-height: 40px;
-  font-style: normal;
-  font-size: 28px;
-  padding-bottom: 8px;
-
-}
-
-.card-description {
-  font-weight: 600;
-  line-height: 32px;
-  color: hsla(0, 0%, 100%, 0.5);
-  font-size: 16px;
-  max-width: 470px;
-}
-
-    </style>
+  
 </head>
 <body>
 </body>
