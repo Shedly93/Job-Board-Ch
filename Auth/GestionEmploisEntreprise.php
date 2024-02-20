@@ -165,6 +165,13 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
+    document.getElementById('logout').addEventListener('click', function() {
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('id_entreprise');
+    localStorage.removeItem('user_type');
+    
+    window.location.href = 'login.html';
+});
     function logIdEmploi(idEmploi) {
         console.log('ID Emploi cliqué:', idEmploi);
 
