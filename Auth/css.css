@@ -37,11 +37,12 @@
 }
 
 .box{
-	width: 360px;
-	height: 35px;
-	margin-top: 10px;
-	font-family: verdana;
-	font-size: 12px;
+    width: fit-content;
+    height: 35px;
+    margin-top: 10px;
+    font-family: verdana;
+    font-size: 12px;
+    float: right;
 }
 
 .textBox{
