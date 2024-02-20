@@ -178,28 +178,7 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
 <body>
     <div style="overflow: hidden; width: 100%; position: absolute;">
 
-       <nav>
-<img src="http://localhost:8080/Job-Board-Ch/Home/Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
-            <ul>
-                <li><a href="#">Accueil</a></li>
-                <li><a href="../Auth//GestionEmploisutilisateur.php">Offres d'emploi</a></li>
-                <li><a href="./contact.html">Contact</a></li>
-                <li><a href="../Auth//login.html">Login</a></li>
-            </ul>
-            
-<div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" .dropdown id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-            Register  
-      <i class="fa fa-caret-down"></i>
-    </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-      <button class="dropdown-item" href="../Auth/InscriUtilisateur.html">Utilisateur</button>
-      <button class="dropdown-item" href="../Auth//inscriEntreprise.html">Entreprise</button>
-    </div>
-  </div> 
-
-        </nav>
+       
     <h2 class="page-title">Liste des emplois entreprise</h2>
     
     <div class="container-gestionUser">

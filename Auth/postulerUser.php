@@ -9,7 +9,6 @@ require_once 'Application.php';
 require_once 'Utilisateur.php';
 require_once 'Emploi.php';
 require_once 'Entreprise.php';
-
 require 'vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -18,7 +17,6 @@ use PHPMailer\PHPMailer\Exception;
 if (isset($_GET['id_emploi'])) {
     $id_emploi = $_GET['id_emploi'];
 
-    // Crée une nouvelle instance d'Application sans spécifier le statut
     $application = new Application($conn, null, null, null);
     $applicationsData = $application->getApplicationsParEmploi($id_emploi);
 
@@ -33,24 +31,18 @@ if (isset($_GET['id_emploi'])) {
                     <div class="card">
                         <div class="container-card bg-white-box">
     <?php
-    // Récupérer les informations des applications pour un emploi spécifique
     $applications = $application->getApplicationsParEmploi($applicationItem['id_emploi']);
 
-    // Vérifier si des applications ont été trouvées
     if ($applications) {
-        // Parcourir les applications
         foreach ($applications as $applicationData) {
-            // Afficher les informations de l'emploi associé à l'application
             echo "ID de l'emploi: " . $applicationData['id_emploi'] . "<br>";
             echo "Titre de l'emploi: " . $applicationData['titre'] . "<br>";
 
-            // Afficher les informations de l'utilisateur associé à l'application
             echo "ID de l'utilisateur: " . $applicationData['id_utilisateur'] . "<br>";
             echo "Nom de l'utilisateur: " . $applicationData['nom'] . "<br>";
             echo "Prenom de l'utilisateur: " . $applicationData['prenom'] . "<br>";
             echo "Description de l'utilisateur: " . $applicationData['description_utilisateur'] . "<br>";
 
-            // Afficher le formulaire pour accepter ou refuser l'application
             echo "<form method='post' class='forme-ac-ref'>";
             echo "<input type='hidden' name='id_user' value='" . $applicationData['id_utilisateur'] . "' />";
             echo "<input type='hidden' name='id_emploi' value='" . $applicationData['id_emploi'] . "' />";
@@ -156,12 +148,14 @@ if (isset($_POST['accepter']) || isset($_POST['refuser'])) {
     width: 100%;
     height: 97vh;
     background: linear-gradient(170deg, #080509, #1a171c, #080509);
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .gradient-cards {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
     width: 100%;
     height: 100%;
 }
@@ -177,10 +171,10 @@ if (isset($_POST['accepter']) || isset($_POST['refuser'])) {
 }
 
 .card {
-    max-width: 35%;
+    max-width: 25%;
     border: 0;
     width: 100%;
-    height: 50vh;
+    height: 55vh;
 }
 
 .container-card {

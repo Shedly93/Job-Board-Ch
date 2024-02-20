@@ -98,7 +98,6 @@ ul li a:hover::after {
     margin-left: 7px;
     color: transparent;
     -webkit-text-stroke: 1px white;
-    background: url(images/pattern.png);
     -webkit-background-clip: text;
     background-clip: text;
     background-position: 0 0;

@@ -4,6 +4,8 @@ require_once 'Emploi.php';
 require_once 'Application.php';
 require_once 'FiltreEmploi.php';
 
+
+
 $servername = "localhost";
 $username = "root";
 $password = ""; 
@@ -26,6 +28,7 @@ if (isset($_POST['logout'])) {
     session_destroy();
     echo '<script>';
     echo 'localStorage.removeItem("user_id");'; 
+    echo 'localStorage.removeItem("id_entreprise");'; 
     echo '</script>';
     header("Location: login.html");
     exit();
@@ -193,7 +196,7 @@ input[type="text"] {
 </head>
 <body>
 <div style="overflow: hidden; width: 100%; position: absolute;">
-       <nav>
+       <!-- <nav>
 <img src="http://localhost:8080/Job-Board-Ch/Home/Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
             <ul>
                 <li><a href="../../Home/index.html">Accueil</a></li>
@@ -212,7 +215,7 @@ input[type="text"] {
     </div>
   </div> 
 
-        </nav>
+        </nav> -->
     <div class="container">
         <div class="top_barre">
         <h1 class="container-title-user"><b>List Des Emplois</b></h1>

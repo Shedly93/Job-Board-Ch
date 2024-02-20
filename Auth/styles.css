@@ -9,13 +9,13 @@
 }
 
 .container {
-	
     position: relative;
-    height: 100vh;
+    height: 92.8vh;
     width: 100%;
     background-position: center;
-    padding: 0 8%;
+    padding: 0% 5%;
     background: linear-gradient(45deg, black, transparent);
+	overflow: hidden;
 }
 
 nav {

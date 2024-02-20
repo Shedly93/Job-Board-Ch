@@ -2,6 +2,7 @@
 ob_start();
 
 require_once 'config.php';
+// require ('../navigation/navbar.html');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail = mysqli_real_escape_string($conn, $_POST['mail']);

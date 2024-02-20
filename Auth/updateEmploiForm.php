@@ -1,14 +1,8 @@
 <?php
-// Assurez-vous d'avoir inclus la classe Emploi et EmploiManager au préalable
-
-// Récupérer l'ID de l'emploi à mettre à jour depuis l'URL ou d'une autre manière
-$idEmploi = $_GET['idEmploi']; // Assurez-vous de valider et d'échapper cette valeur en production
-
-// Récupérer les détails de l'emploi à partir de la base de données
+$idEmploi = $_GET['idEmploi']; 
 $emploiManager = new EmploiManager($votreConnexionPDO);
 $emploi = $emploiManager->getEmploiById($idEmploi);
 
-// Afficher le formulaire de mise à jour
 ?>
 <!DOCTYPE html>
 <html lang="en">

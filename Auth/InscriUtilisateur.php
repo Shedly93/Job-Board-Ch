@@ -2,6 +2,7 @@
 require_once 'config.php';
 require_once 'Utilisateur.php';
 
+
 if (isset($_POST['name'], $_POST['lastname'], $_POST['mail'], $_POST['password'])) {
     $nom = $_POST['name'];
     $prenom = $_POST['lastname'];
