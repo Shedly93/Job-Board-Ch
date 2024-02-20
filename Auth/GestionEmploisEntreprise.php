@@ -311,6 +311,17 @@ function submitDeleteForm(idEmploi) {
 
 
 </script>
-
+<div class="footer-social-links"3> 
+  
+</div>
+</div>
+<div class="footer-copyright">
+<div class="footer-copyright-wrapper">
+  <p class="footer-copyright-text">
+    <a class="footer-copyright-link" href="#" target="_self"> ©2024. | CH-JOB-BOARD. | All rights reserved. </a>
+  </p>
+</div>
+</div>
+</footer>
 </body>
 </html>

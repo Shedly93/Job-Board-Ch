@@ -43,6 +43,7 @@ if (isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Entreprise</title>
+    <link rel="stylesheet" href="styles.css">
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="modal.css">
     <style>
@@ -351,7 +352,18 @@ if (isset($_SESSION['user_id'])) {
         }
     }
 </script>
-
+<div class="footer-social-links"3> 
+  
+</div>
+</div>
+<div class="footer-copyright">
+<div class="footer-copyright-wrapper">
+  <p class="footer-copyright-text">
+    <a class="footer-copyright-link" href="#" target="_self"> ©2024. | CH-JOB-BOARD. | All rights reserved. </a>
+  </p>
+</div>
+</div>
+</footer>
 </body>
 </html>
 
