@@ -61,126 +61,25 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Emplois</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        
-        body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
+<link rel="stylesheet" href="\Job-Board-Ch\Auth\gestionEmploiEntreprise.css">  
 
-.page-title {
-    color: #333;
-    text-align: center;
-}
-
-.container-gestionUser {
-    max-width: 100%;
-    width: 95%;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    gap: 3%;
-    overflow: hidden;
-    height: 82vh;
-}
-
-.form-submit{
-    width: 25%;
-}
-.list-emploi{
-        display: flex;
-    width: 72%;
-    flex-direction: column;
-    gap: 10px;
-    overflow-y: auto;
-}
-
-.emploi-form,
-.emploi-update-form,
-.emploi-delete-form {
-    margin-bottom: 20px;
-}
-
-.form-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.form-input,
-.form-textarea,
-.form-button {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.form-textarea {
-    resize: vertical;
-}
-
-.job-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 15px;
-}
-
-.emploi-title {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.entreprise-name {
-    font-weight: bold;
-    color: #555;
-}
-
-.emploi-description,
-.emploi-salaire,
-.emploi-contrat,
-.emploi-date-post {
-    margin-bottom: 5px;
-}
-.pos-bouton{
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.btn {
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-.btn-danger {
-    background-color: #dc3545;
-    color: #fff;
-}
-
-.btn-success {
-    background-color: #28a745;
-    color: #fff;
-}
-
-    </style>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="http://localhost:8080/Job-Board-Ch/Home/styles.css">
 </head>
 <body>
-    <div style="overflow: hidden; width: 100%; position: absolute;">
-
-       
-    <h2 class="page-title">Liste des emplois entreprise</h2>
+    <div style="overflow: hidden; width: 100%; position: absolute;top:0;height: 100vh;
+    ">
+           <nav>
+<img src="http://localhost:8080/Job-Board-Ch/Home/Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
+            <ul>
+                <li><a href="../../Home/index.html">Accueil</a></li>
+                <li><a href="../Auth//GestionEmploisutilisateur.php">Offres d'emploi</a></li>
+                <li><a href="../..//Home/contact.html">Contact</a></li>
+                <li><a href="../profile_entreprise.php">Profile</a></li>
+<li><a href="#" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+    <!-- <h2 class="page-title">Liste des emplois entreprise</h2> -->
     
     <div class="container-gestionUser">
     <div class="form-submit">    
@@ -253,6 +152,13 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
             <?php endforeach; ?>
         </div>
     </div>
+    <div class="footer-copyright">
+<div class="footer-copyright-wrapper">
+  <p class="footer-copyright-text">
+    <a class="footer-copyright-link" href="#" target="_self"> ©2024. | CH-JOB-BOARD. | All rights reserved. </a>
+  </p>
+</div>
+</div>
     </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -312,17 +218,7 @@ function submitDeleteForm(idEmploi) {
 
 
 </script>
-<div class="footer-social-links"3> 
   
-</div>
-</div>
-<div class="footer-copyright">
-<div class="footer-copyright-wrapper">
-  <p class="footer-copyright-text">
-    <a class="footer-copyright-link" href="#" target="_self"> ©2024. | CH-JOB-BOARD. | All rights reserved. </a>
-  </p>
-</div>
-</div>
-</footer>
+
 </body>
 </html>
