@@ -1,7 +1,6 @@
-        
-        body {
+body {
     font-family: Arial, sans-serif;
-    background-color: #ffffff;
+    background-color: #000;
     margin: 0;
     padding: 0;
 }
@@ -105,5 +104,5 @@
 
 .btn-success {
     background-color: #28a745;
-    color: #fff;
+    color: #fff;
 }

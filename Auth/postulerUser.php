@@ -19,7 +19,7 @@ if (isset($_GET['id_emploi'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="/Job-Board-Ch\Auth\sss.css">
+  <link rel="stylesheet" href="\Job-Board-Ch\Auth\sss.css">
 </head>
 <body>
             <div class="dashboard-container">

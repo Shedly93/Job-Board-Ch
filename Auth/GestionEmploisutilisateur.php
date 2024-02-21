@@ -40,36 +40,47 @@ if (isset($_POST['logout'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="\Job-Board-Ch\Auth\gestionEmploiUtilisateur.css">  
-<link rel="stylesheet" href="\Job-Board-Ch\Home\styles.css">
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
+    
+<link rel="stylesheet" href="/Job-Board-Ch/Home/styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
     
+</head>
 <body>
-<div class="body_List_Des_Emplois">
-       <nav>
+<div style="overflow: hidden; width: 100%; position: absolute;">
+       <!-- <nav>
 <img src="http://localhost:8080/Job-Board-Ch/Home/Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
             <ul>
                 <li><a href="../../Home/index.html">Accueil</a></li>
                 <li><a href="../Auth//GestionEmploisutilisateur.php">Offres d'emploi</a></li>
                 <li><a href="../..//Home/contact.html">Contact</a></li>
                 <li><a href="../Auth//login.html">Login</a></li>
-<li><a href="#" id="logout">Logout</a></li>
             </ul>
             
-          
+            <div class="dropdown">
+    <button class="dropbtn">Register  
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="../Auth/InscriUtilisateur.html">Utilisateur</a>
+      <a href="../Auth//inscriEntreprise.html">Entreprise</a>
+    </div>
+  </div> 
 
-        </nav>
-        <div style="overflow-x:hidden; overflow-y:auto;    height: 81vh;">
-    <div class="container_List_Des_Emplois">
-   
+        </nav> -->
+    <div class="container">
+        <div class="top_barre">
+        <h1 class="container-title-user"><b>List Des Emplois</b></h1>
+          <form method="POST">
+            <input type="submit" name="logout" value="Logout" class="logout" >
+        </form>
+        </div>
         <form method="GET" id="searchbox">
-    <input type="text" name="titre" id="titre" placeholder="Rechercher par titre " style="margin-left:2%;">
+    <label for="titre" class="sr-only">Rechercher par titre :</label>
+    <input type="text" name="titre" id="titre">
     <input type="submit" id="button-submit">
 </form>
 
-<div id="message" class="alert" role="alert" style="color: #000000 !important; background-color: #d4d4ed !important; border-color: #c3e6cb !important; width: max-content; position: absolute; right: 1%; top: 2%;"></div>
 
       
         <div class="gradient-cards">
@@ -119,9 +130,14 @@ if (isset($_POST['logout'])) {
             }
         }
         ?>
+        <p><?php echo $message; ?></p>
       
     </div>
-        </div>
+    </div>
+    <div class="footer-social-links"3> 
+  
+</div>
+</div>
 <div class="footer-copyright">
 <div class="footer-copyright-wrapper">
   <p class="footer-copyright-text">
@@ -129,30 +145,7 @@ if (isset($_POST['logout'])) {
   </p>
 </div>
 </div>
-</div>
-  
-
-<script>
-document.getElementById('logout').addEventListener('click', function() {
-    localStorage.removeItem('user_id');
-    localStorage.removeItem('id_entreprise');
-    localStorage.removeItem('user_type');
-    
-    window.location.href = 'login.html';
-});
-
-var message = '<?php echo $message; ?>';
-var messageDiv = document.getElementById('message');
-
-if (message !== '') {
-    messageDiv.textContent = message;
-    messageDiv.classList.add('alert-' + (message.startsWith('Erreur') ? 'danger' : 'success'));
-    messageDiv.classList.add('show');
-}
-</script>
-
-
-
+</footer>
 </body>
 </html>
 

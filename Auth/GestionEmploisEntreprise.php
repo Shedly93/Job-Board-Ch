@@ -64,13 +64,14 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
 <link rel="stylesheet" href="\Job-Board-Ch\Auth\gestionEmploiEntreprise.css">  
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://localhost:8080/Job-Board-Ch/Home/styles.css">
+<link rel="stylesheet" href="/Job-Board-Ch/Home/styles.css">
+<link rel="stylesheet" href="/gestionEmploiEntreprise.css">
 </head>
 <body>
     <div style="overflow: hidden; width: 100%; position: absolute;top:0;height: 100vh;
     ">
            <nav>
-<img src="http://localhost:8080/Job-Board-Ch/Home/Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
+<img src="Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
             <ul>
                 <li><a href="../../Home/index.html">Accueil</a></li>
                 <li><a href="../Auth//GestionEmploisutilisateur.php">Offres d'emploi</a></li>
