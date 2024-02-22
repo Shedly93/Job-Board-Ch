@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     error_log("Mail: $mail, Password: $password, UserType: $userType");
 
     if ($mail == 'admin@admin.com' && $password == 'admin123') {
-        header("Location: ../dashboard/dashboard.php");
+        header("Location: ../../dashboard/dashboard.php");
         exit();
     }
 

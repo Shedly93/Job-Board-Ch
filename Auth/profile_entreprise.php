@@ -47,30 +47,29 @@ if (isset($_SESSION['user_id'])) {
         <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 <style>
- /* Style général pour les modals */
+ 
 .modal {
-    display: none; /* Par défaut, la modal est cachée */
-    position: fixed; /* Position fixe pour rester au-dessus du contenu */
-    z-index: 1000; /* Assure que la modal est au-dessus du reste du contenu */
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
     left: 0;
     top: 0;
-    width: 100%; /* Prend toute la largeur de l'écran */
-    height: 100%; /* Prend toute la hauteur de l'écran */
-    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour l'arrière-plan */
-    overflow: hidden; /* Ajoute une barre de défilement si nécessaire */
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    overflow: hidden; 
 }
 
-/* Contenu de la modal */
 .modal-content {
-    background-color: #fefefe; /* Fond blanc pour le contenu */
+    background-color: #fefefe; 
     border: 1px solid #888;
-    width: 30%; /* Largeur de la modal */
+    width: 30%; 
     border-radius: 8px;
     position: relative; 
     top: -15%;
 }
 
-/* Bouton de fermeture */
+
 .close {
     color: #aaa;
     float: right;
@@ -85,7 +84,6 @@ if (isset($_SESSION['user_id'])) {
     cursor: pointer;
 }
 
-/* Style pour les éléments de formulaire à l'intérieur de la modal */
 .modal-content label {
     display: block;
     margin-bottom: 10px;
@@ -93,7 +91,7 @@ if (isset($_SESSION['user_id'])) {
 
 .modal-content input[type="text"],
 .modal-content input[type="email"] {
-    width: calc(100% - 20px); /* Largeur du champ de formulaire */
+    width: calc(100% - 20px); 
     padding: 8px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -113,7 +111,6 @@ if (isset($_SESSION['user_id'])) {
     background-color: #0056b3;
 }
 
-/* Afficher la modal */
 .modal.show {
     display: block;
 }
@@ -125,10 +122,12 @@ if (isset($_SESSION['user_id'])) {
         var userId = localStorage.getItem('user_id');
         var userType = localStorage.getItem('user_type');
 
-        function redirectToGestionEmploisEntreprise(idEntreprise, userId, userType) {
-            localStorage.setItem('id_entreprise', idEntreprise);
-            window.location.href = `GestionEmploisEntreprise.php?idEntreprise=${idEntreprise}&userId=${userId}&userType=${userType}`;
-        }
+            function redirectToGestionEmploisEntreprise(idEntreprise, userId, userType) {
+            localStorage.setItem('idEntreprise', idEntreprise);
+            localStorage.setItem('userId', userId);
+            localStorage.setItem('userType', userType);
+        window.location.href = 'GestionEmploisEntreprise.php';
+    }
 
         function openModalWithData(entrepriseId, nom, adresse, email, localisation, domaine) {
             document.getElementById('entreprise_id').value = entrepriseId;
@@ -143,12 +142,10 @@ if (isset($_SESSION['user_id'])) {
 
       
     </script>
+
+
 <div class="profile-page">
-    <!-- <div class="act-emploi">
-        <button class="btn-envoie-emploi" onclick="redirectToGestionEmploisEntreprise(<?= $user_id ?>, <?= $user_id ?>, 'entreprise')">
-            Emploi
-        </button>
-    </div> -->
+
    <div class="profile">
   <div class="profile-bg"></div>
   <section class="container-profile">
@@ -156,7 +153,6 @@ if (isset($_SESSION['user_id'])) {
     </aside>
     <section class="profile-info">
       <h1 class="first-name"><?= $entreprise_info->getNom() ?></h1>
-      <!-- <h1 class="second-name">Yun He</h1> -->
       <h2>ABOUT</h2>
       <p>
        
@@ -229,6 +225,5 @@ Domaine : <?= $entreprise_info->getDomaine() ?>
 
 <?php
 if (!$entreprise_info) {
-    // echo "Erreur lors de la récupération des informations de l'entreprise.";
 }
 ?>

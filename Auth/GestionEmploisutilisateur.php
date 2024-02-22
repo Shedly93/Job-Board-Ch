@@ -50,22 +50,14 @@ if (isset($_POST['logout'])) {
        <nav>
 <img src="Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
             <ul>
-                <li><a href="../../Home/index.html">Accueil</a></li>
+                <li><a href="\Job-Board-Ch\Home/index.html">Accueil</a></li>
                 <li><a href="../Auth//GestionEmploisutilisateur.php">Offres d'emploi</a></li>
-                <li><a href="../..//Home/contact.html">Contact</a></li>
-                <li><a href="../Auth//login.html">Logout</a></li>
+                <li><a href="\Job-Board-Ch\Home\contact.html">Contact</a></li>
+                <li><a href="../Auth/login.html" >Logout</a></li>
            
             </ul>
             
-            <!-- <div class="dropdown">
-    <button class="dropbtn">Register  
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="../Auth/InscriUtilisateur.html">Utilisateur</a>
-      <a href="../Auth//inscriEntreprise.html">Entreprise</a>
-    </div>
-  </div>  -->
+
 
 
         </nav>

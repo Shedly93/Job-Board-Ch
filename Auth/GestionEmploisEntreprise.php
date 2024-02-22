@@ -105,7 +105,7 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
     Supprimer l'emploi
 </button>
 <a href="../PostulerUser.php?id_emploi=<?= $emploi['id_emploi']; ?>" class="btn btn-success" onclick="logIdEmploi(<?= $emploi['id_emploi']; ?>">
-    Postuler
+    Candidature d'emploi
 </a>
 
                     </div>

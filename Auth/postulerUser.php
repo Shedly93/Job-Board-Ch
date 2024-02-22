@@ -45,41 +45,6 @@ if (isset($_GET['id_emploi'])) {
 </head>
 <body>
     <div class="dashboard-entreprise">
-        <div class="header">
-            <nav>
-                <img src="\Job-Board-Ch\Auth\Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
-                <ul>
-                    <li><a href="../../Home/index.html">Accueil</a></li>
-                    <li><a href="../Auth//GestionEmploisutilisateur.php">Offres d'emploi</a></li>
-                    <li><a href="../..//Home/contact.html">Contact</a></li>
-                    <li><a href="javascript:history.go(-1)">List Emploi</a></li>
-                    <li><a href="#" id="logout">Logout</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="dashboard_container">
-            <aside class="main-sidebar">
-                <div class="sidebar" id="sidebar">
-                    <ul class="list-items">
-                        <li class="item">
-                            <a href="../GestionEmploisEntreprise.php">
-                                <span class="material-icons-sharp"></span>
-                                <span>emploi</span>
-                            </a>
-                        </li>
-                        <li class="item">
-                            <a href="../profile_entreprise.php">
-                                <span>Profile</span>
-                            </a>
-                        </li>
-                        <li class="item">
-                            <a href="#">
-                                <span>Applications</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </aside> 
             <div class="content">
                 <section class="recent-orders">
                     <table>
@@ -153,7 +118,6 @@ if (isset($_GET['id_emploi'])) {
                     }
                     ?>
                 </section>
-            </div>
             <!-- <div class="footer-copyright">
                 <div class="footer-copyright-wrapper">
                     <p>
