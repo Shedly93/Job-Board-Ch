@@ -2,7 +2,6 @@
 ob_start();
 
 require_once 'config.php';
-// require ('../navigation/navbar.html');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail = mysqli_real_escape_string($conn, $_POST['mail']);
@@ -11,12 +10,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     error_log("Mail: $mail, Password: $password, UserType: $userType");
 
+    if ($mail == 'admin@admin.com' && $password == 'admin123') {
+        header("Location: ../dashboard/dashboard.php");
+        exit();
+    }
+
     if ($userType == 'utilisateur') {
         $table = 'utilisateur';
         $redirect_page = 'profile_utilisateur.php';
     } elseif ($userType == 'entreprise') {
         $table = 'entreprise';
-        $redirect_page = 'profile_entreprise.php';
+        $redirect_page = './entreprise/dashboardEntreprise.php';
     } else {
         header("HTTP/1.1 400 Bad Request");
         exit("Type d'utilisateur non valide");

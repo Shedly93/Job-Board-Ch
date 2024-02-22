@@ -34,17 +34,19 @@
     background: #bfcabf;
     }
     .gradient-cards {
-    display: flex;
+display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: 90%;
     gap: 0.9%;
     justify-content: flex-start;
     align-items: center;
     margin-block: 2%;
+    position: relative;
+    left: 5%;
 }
     .card-user {
-width: 19%;
-    margin: 5px 2px;
+    width: 23%;
+    margin: 5px 7px;
     box-shadow: 0 4px 8px rgb(0 0 0 / 56%);
     overflow: hidden;
     border-radius: 8px;
@@ -157,6 +159,10 @@ input[type="text"] {
 
 #button-submit:hover {
     background-color: #45a049;
+}
+
+#form-nav-logout{
+    
 }
 
 .logout{

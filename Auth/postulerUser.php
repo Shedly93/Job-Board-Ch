@@ -19,134 +19,150 @@ if (isset($_GET['id_emploi'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="\Job-Board-Ch\Auth\sss.css">
+    <link rel="stylesheet" href="\Job-Board-Ch\Auth\sss.css">
+    <script>
+        function afficherMessagePostulationEchouee() {
+            alert("La postulation a échoué. Veuillez réessayer.");
+        }
+    </script>
+    <style>
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.alert-failure {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+    </style>
 </head>
 <body>
-            <div class="dashboard-container">
-
-                <aside class="main-sidebar">
-                <header class="aside-header">
-                    <div class="brand">
-                        <h3>Coding City</h3>
-                    </div>
-                </header>
-
+    <div class="dashboard-entreprise">
+        <div class="header">
+            <nav>
+                <img src="\Job-Board-Ch\Auth\Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
+                <ul>
+                    <li><a href="../../Home/index.html">Accueil</a></li>
+                    <li><a href="../Auth//GestionEmploisutilisateur.php">Offres d'emploi</a></li>
+                    <li><a href="../..//Home/contact.html">Contact</a></li>
+                    <li><a href="javascript:history.go(-1)">List Emploi</a></li>
+                    <li><a href="#" id="logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="dashboard_container">
+            <aside class="main-sidebar">
                 <div class="sidebar" id="sidebar">
                     <ul class="list-items">
                         <li class="item">
-                            <a href="#">
-                              
+                            <a href="../GestionEmploisEntreprise.php">
+                                <span class="material-icons-sharp"></span>
                                 <span>emploi</span>
                             </a>
                         </li>
                         <li class="item">
-                            <a href="#">
-                               
-                                <span>Clients</span>
+                            <a href="../profile_entreprise.php">
+                                <span>Profile</span>
                             </a>
                         </li>
                         <li class="item">
                             <a href="#">
-                                <span>Reglages</span>
-                            </a>
-                        </li>
-                        <li class="item">
-                            <a href="#">
-                                <span>Ajouter un produit</span>
-                            </a>
-                        </li>
-                        <li class="item">
-                            <a href="">
-                                <span class="material-icons-sharp">
-                                    logout
-                                </span>
-                                <span>Se Deconnecter</span>
+                                <span>Applications</span>
                             </a>
                         </li>
                     </ul>
                 </div>
-            </aside>
-
-  <section class="recent-orders">
-    <div class="ro-title">
-        <h2 class="recent-orders-title">Commandes récentes</h2>
-        <a href="#" class="show-all">Tout afficher</a>
-    </div>
-    <table>
-        <thead>
-            <tr>
-                <th>ID de l'emploi</th>
-                <th>Titre de l'emploi</th>
-                <th>ID de l'utilisateur</th>
-                <th>Nom de l'utilisateur</th>
-                <th>Prénom de l'utilisateur</th>
-                <th>Description de l'utilisateur</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            foreach ($applicationsData as $applicationItem) {
-                $applications = $application->getApplicationsParEmploi($applicationItem['id_emploi']);
-                if ($applications) {
-                    foreach ($applications as $applicationData) {
-                        ?>
-                        <tr>
-                            <td><?php echo $applicationData['id_emploi']; ?></td>
-                            <td><?php echo $applicationData['titre']; ?></td>
-                            <td><?php echo $applicationData['id_utilisateur']; ?></td>
-                            <td><?php echo $applicationData['nom']; ?></td>
-                            <td><?php echo $applicationData['prenom']; ?></td>
-                            <td><?php echo $applicationData['description_utilisateur']; ?></td>
-                            <td>
-                                <form method='post' class='forme-ac-ref'>
-                                    <input type='hidden' name='id_user' value='<?php echo $applicationData['id_utilisateur']; ?>' />
-                                    <input type='hidden' name='id_emploi' value='<?php echo $applicationData['id_emploi']; ?>' />
-                                    <div class='action-buttons'>
-                                        <button class='accept-button' type='submit' name='accepter'>Accepter</button>
-                                        <button class='reject-button' type='submit' name='refuser'>Refuser</button>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                        <?php
+            </aside> 
+            <div class="content">
+                <section class="recent-orders">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Titre de l'emploi</th>
+                                <th>Nom de l'utilisateur</th>
+                                <th>Prénom de l'utilisateur</th>
+                                <th>Description de l'utilisateur</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($applicationsData as $applicationItem) {
+                                $applications = $application->getApplicationsParEmploi($applicationItem['id_emploi']);
+                                if ($applications) {
+                                    foreach ($applications as $applicationData) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $applicationData['titre']; ?></td>
+                                            <td><?php echo $applicationData['nom']; ?></td>
+                                            <td><?php echo $applicationData['prenom']; ?></td>
+                                            <td><?php echo $applicationData['description_utilisateur']; ?></td>
+                                            <td>
+                                                <form method='post' class='forme-ac-ref'>
+                                                    <input type='hidden' name='id_user' value='<?php echo $applicationData['id_utilisateur']; ?>' />
+                                                    <input type='hidden' name='id_emploi' value='<?php echo $applicationData['id_emploi']; ?>' />
+                                                    <div class='action-buttons'>
+                                                        <button class='accept-button' type='submit' name='accepter'>Accepter</button>
+                                                        <button class='reject-button' type='submit' name='refuser'>Refuser</button>
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
+                                }
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                    <?php
+                    if (isset($_POST['postuler'])) {
+                        if ($postulationReussie) {
+                            echo "<script>alert('Postulation réussie.');</script>";
+                        } else {
+                            echo "<script>afficherMessagePostulationEchouee();</script>";
+                        }
                     }
-                }
-            }
-            ?>
-        </tbody>
-    </table>
-    <?php
-    if (isset($_POST['postuler'])) {
-        $textePostulation = "bonjour";
-        echo "Postulation envoyée avec succès: " . $textePostulation;
-    }
 
+                    if (isset($_POST['accepter']) || isset($_POST['refuser'])) {
+                        if (isset($_POST['id_user'], $_POST['id_emploi'])) {
+                            $id_user = $_POST['id_user'];
+                            $id_emploi = $_POST['id_emploi'];
 
-    if (isset($_POST['accepter']) || isset($_POST['refuser'])) {
-        if (isset($_POST['id_user'], $_POST['id_emploi'])) {
-            $id_user = $_POST['id_user'];
-            $id_emploi = $_POST['id_emploi'];
+                            $status = isset($_POST['accepter']) ? "accepter" : "refuser";
 
-            $status = isset($_POST['accepter']) ? "accepter" : "refuser";
+                            $updateQuery = "UPDATE application SET status = ? WHERE id_utilisateur = ? AND id_emploi = ?";
+                            $updateStmt = $conn->prepare($updateQuery);
+                            $updateStmt->execute([$status, $id_user, $id_emploi]);
 
-            $updateQuery = "UPDATE application SET status = ? WHERE id_utilisateur = ? AND id_emploi = ?";
-            $updateStmt = $conn->prepare($updateQuery);
-            $updateStmt->execute([$status, $id_user, $id_emploi]);
-
-            $utilisateur = Utilisateur::getInfoFromDatabase($id_user, $conn);
-            if ($utilisateur) {
-                // Traitement de l'acceptation ou du refus de la candidature sans envoi d'email
-            } else {
-                echo "ID de l'utilisateur non trouvé dans la base de données.<br>";
-            }
-        } else {
-            echo "ID de l'utilisateur ou ID de l'emploi non trouvé dans la requête POST.<br>";
-        }
-    }
-    ?>
-</section>
+                            $utilisateur = Utilisateur::getInfoFromDatabase($id_user, $conn);
+                            if ($utilisateur) {
+                            } else {
+                                echo "ID de l'utilisateur non trouvé dans la base de données.<br>";
+                            }
+                        } else {
+                            echo "ID de l'utilisateur ou ID de l'emploi non trouvé dans la requête POST.<br>";
+                        }
+                    }
+                    ?>
+                </section>
             </div>
+            <div class="footer-copyright">
+                <div class="footer-copyright-wrapper">
+                    <p>
+                        <a href="#" target="_self"> ©2024. | CH-JOB-BOARD. | Tous droits réservés. </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 <?php

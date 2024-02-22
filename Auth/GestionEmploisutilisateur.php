@@ -40,21 +40,21 @@ if (isset($_POST['logout'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
-<link rel="stylesheet" href="/Job-Board-Ch/Home/styles.css">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="gestionEmploiutilisateur.css">
 </head>
     
 </head>
 <body>
 <div style="overflow: hidden; width: 100%; position: absolute;">
-       <!-- <nav>
+       <nav>
 <img src="http://localhost:8080/Job-Board-Ch/Home/Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
             <ul>
                 <li><a href="../../Home/index.html">Accueil</a></li>
                 <li><a href="../Auth//GestionEmploisutilisateur.php">Offres d'emploi</a></li>
                 <li><a href="../..//Home/contact.html">Contact</a></li>
                 <li><a href="../Auth//login.html">Login</a></li>
+           
             </ul>
             
             <div class="dropdown">
@@ -67,19 +67,21 @@ if (isset($_POST['logout'])) {
     </div>
   </div> 
 
-        </nav> -->
-    <div class="container">
+
+        </nav>
+    <div class="container-user">
         <div class="top_barre">
         <h1 class="container-title-user"><b>List Des Emplois</b></h1>
-          <form method="POST">
-            <input type="submit" name="logout" value="Logout" class="logout" >
-        </form>
+          
         </div>
         <form method="GET" id="searchbox">
     <label for="titre" class="sr-only">Rechercher par titre :</label>
     <input type="text" name="titre" id="titre">
     <input type="submit" id="button-submit">
 </form>
+       <!-- <form method="POST" id="form-nav-logout">
+            <input type="submit" name="logout" value="Logout" class="logout" >
+        </form> -->
 
 
       
@@ -133,19 +135,17 @@ if (isset($_POST['logout'])) {
         <p><?php echo $message; ?></p>
       
     </div>
-    </div>
-    <div class="footer-social-links"3> 
-  
-</div>
-</div>
-<div class="footer-copyright">
+     <div class="footer-copyright">
 <div class="footer-copyright-wrapper">
   <p class="footer-copyright-text">
     <a class="footer-copyright-link" href="#" target="_self"> ©2024. | CH-JOB-BOARD. | All rights reserved. </a>
   </p>
 </div>
 </div>
-</footer>
+    </div>
+   
+
+</div>
 </body>
 </html>
 

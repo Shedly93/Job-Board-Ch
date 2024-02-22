@@ -64,24 +64,13 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
 <link rel="stylesheet" href="\Job-Board-Ch\Auth\gestionEmploiEntreprise.css">  
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="/Job-Board-Ch/Home/styles.css">
-<link rel="stylesheet" href="/gestionEmploiEntreprise.css">
+<!-- <link rel="stylesheet" href="/Job-Board-Ch/Home/styles.css"> -->
 </head>
 <body>
-    <div style="overflow: hidden; width: 100%; position: absolute;top:0;height: 100vh;
-    ">
-           <nav>
-<img src="Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
-            <ul>
-                <li><a href="../../Home/index.html">Accueil</a></li>
-                <li><a href="../Auth//GestionEmploisutilisateur.php">Offres d'emploi</a></li>
-                <li><a href="../..//Home/contact.html">Contact</a></li>
-                <li><a href="../profile_entreprise.php">Profile</a></li>
-<li><a href="#" id="logout">Logout</a></li>
-            </ul>
-        </nav>
-    <!-- <h2 class="page-title">Liste des emplois entreprise</h2> -->
-    
+    <div
+     
+     >
+
     <div class="container-gestionUser">
     <div class="form-submit">    
     <form method="POST" action="" class="emploi-form">
@@ -115,9 +104,10 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
 <button type="button" class="btn btn-danger" onclick="submitDeleteForm(<?= $emploi['id_emploi']; ?>)">
     Supprimer l'emploi
 </button>
-                    <a href="PostulerUser.php?id_emploi=<?= $emploi['id_emploi']; ?>" class="btn btn-success" onclick="logIdEmploi(<?= $emploi['id_emploi']; ?>">
-                        Postuler
-                    </a>
+<a href="../PostulerUser.php?id_emploi=<?= $emploi['id_emploi']; ?>" class="btn btn-success" onclick="logIdEmploi(<?= $emploi['id_emploi']; ?>">
+    Postuler
+</a>
+
                     </div>
 
                     <div class="modal" tabindex="-1" role="dialog" id="emploiModal<?= $emploi['id_emploi']; ?>">
@@ -153,13 +143,7 @@ $applicationsData = isset($applicationsData) ? $applicationsData : [];
             <?php endforeach; ?>
         </div>
     </div>
-    <div class="footer-copyright">
-<div class="footer-copyright-wrapper">
-  <p class="footer-copyright-text">
-    <a class="footer-copyright-link" href="#" target="_self"> ©2024. | CH-JOB-BOARD. | All rights reserved. </a>
-  </p>
-</div>
-</div>
+
     </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

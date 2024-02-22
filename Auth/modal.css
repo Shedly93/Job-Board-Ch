@@ -14,9 +14,19 @@
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 30%;
+    height: auto;
 }
-
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content textarea {
+    width: calc(100% - 40px); /* Largeur du champ de formulaire (moins les padding) */
+    padding: 8px;
+    margin-bottom: 10px; /* Espacement entre les champs de formulaire */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Inclut les bordures dans la largeur/hauteur totale */
+}
 .close {
     float: right;
     font-size: 20px;
@@ -28,3 +38,12 @@
     color: #f00;
 }
 
+.form-button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    border: #ccc;
+}

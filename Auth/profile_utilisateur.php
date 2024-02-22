@@ -32,263 +32,48 @@ if (isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Utilisateur</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="profileutilisateur.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="modal.css">
-   <style>
-        body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
-.profile-container{
-    width: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-    background: #6f6f6f0f;
-    border-radius: 15px;
-}
-
-.profile-page{
-    width: 100%;
-    background: #f3f2f2;
-    height: 97vh;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    justify-content: center;
-    align-items: center;
-} 
-
-.btn-redirect {
-    cursor: pointer;
-    background-color: #28a745;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-}
-
-#entreprise-card {
-    max-width: 100%;
-    width: 80%;
-    margin: 20px auto;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    padding: 20px;
-    height: 50vh;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.card {
-    width: 85%;
-    /* margin: 20px auto; */
-   background: azure;
-    /* box-shadow: 0px 0px 10px gray; */
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 85%;
-}
-
-.card-text {
-    font-size: 18px;
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    height: 90%;
-    width: 95%;
-    background:transparent;
-    
-}
-
-.left-side, .right-side {
-    flex: 1;
-}
-
-.title, .desc {
-    margin-bottom: 15px;
-}
-
-.title label, .desc label {
-    font-weight: bold;
-    color: #333;
-}
-
-.btn-modifier {
-    cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-}
-
-.btn-modifier:hover {
-    background-color: #0056b3;
-}
-
-.right-side {
-    padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-}
-.card .title {
-    font-size: 26px;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    height: 70%;
-    gap: 5%;
-    padding: 15px;
-}
-
-.card .desc {
-    margin-bottom: 5px;
-    color: #555;
-    font-size: 27px;
-    padding: 10px;
-}
-
-.right-side .desc span {
-    color: #555;
-}
-
-.right-side .actions {
-    text-align: right;
-}
-
-.right-side .actions .btn-modifier {
-    margin-top: 10px;
-}
-
-
-
-.btn-modifier {
-    cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-}
-
-.modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.modal-content label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.modal-content input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.modal-content input[type="submit"] {
-    cursor: pointer;
-    background-color: #28a745;
-    color: #fff;
-}
-
-.close {
-    cursor: pointer;
-}
-
-.close:hover {
-    color: #007bff;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-}
-
-.page-title {
-    color: #333;
-    text-align: center;
-}
-.act-emploi{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 10vh;
-}
-.btn-envoie-emploi{
-    background-color: #007bff;
-    color: #fff;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-    </style>
+  
 </head>
 <body>
-<div class="profile-page">
-    <div class="act-emploi">
-    <button class="btn-envoie-emploi" onclick="redirectToGestionEmplois()"> Recherche Emploi</button>
-       </div>
-           <div class="profile-container">
-<div class="card">
-    <div class="card-text">
-        <div class="left-side">
-            <div class="title">
-                <div>
-                <label for="nom">Nom :</label> 
-                <span id="nom"><?= $user_info->getNom() ?></span> <!-- Contenu affiché -->
-                </div>
-                <br/>
-                <div>
-                <label for="prenom">Prénom :</label>
-                <span id="prenom"><?= $user_info->getPrenom() ?></span> <!-- Contenu affiché -->
+<div class="profile-page-user">
+    <!-- <div class="act-emploi-utilisateur">
+    </div> -->
+   <div class="profile">
+  <div class="profile-bg"></div>
+  <section class="container-profile">
+    <aside class="profile-image">
+    </aside>
+        <section class="profile-info">
+            <h1 class="profile-name"><?= $user_info->getPrenom() . " " . $user_info->getNom() ?></h1>
+            <p class="profile-bio">description : <?= $user_info->getDescription() ?></p>
+            <div class="profile-details">
+                <div class="profile-detail">
+                <label for="email">Email :</label>
+                <span id="email"><?= $user_info->getEmail() ?></span>
                 </div>
             </div>
-        </div>
-        <div class="right-side"> <!-- Correction de la classe right-side -->
-            <div class="desc">
-                <label for="email">Email :</label> <br/>
-                <span id="email"><?= $user_info->getEmail() ?></span> <!-- Contenu affiché -->
-            </div>
-            <div class="desc">
-                <label for="description">Description :</label> <br/>
-                <span id="description"><?= $user_info->getDescription() ?></span> <!-- Contenu affiché -->
-            </div>
-            <div class="actions">
+        </section>
+    </section>
+      <section class="statistics">
+  <div class="actions">
                 <button id="openModalBtn" class="btn-modifier">Modifier</button>
-            </div>
-        </div>
-    </div>
-</div>
+                    <button class="btn-envoie-emploi" onclick="redirectToGestionEmplois()"> Recherche Emploi</button>
 
-    </div>
-           </div>
+            </div>
+      </section>
+
+   </div>
+</div>
+ <div class="footer-copyright">
+<div class="footer-copyright-wrapper">
+  <p class="footer-copyright-text">
+    <a class="footer-copyright-link" href="#" target="_self"> ©2024. | CH-JOB-BOARD. | All rights reserved. </a>
+  </p>
+</div>
+</div>
 
 
     <div id="myModal" class="modal">
@@ -341,18 +126,7 @@ if (isset($_SESSION['user_id'])) {
         }
     </script>
 </body>
-<div class="footer-social-links"3> 
-  
-</div>
-</div>
-<div class="footer-copyright">
-<div class="footer-copyright-wrapper">
-  <p class="footer-copyright-text">
-    <a class="footer-copyright-link" href="#" target="_self"> ©2024. | CH-JOB-BOARD. | All rights reserved. </a>
-  </p>
-</div>
-</div>
-</footer>
+
 </html>
 <?php
     } else {

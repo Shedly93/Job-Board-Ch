@@ -1,4 +1,10 @@
-
+/* Styles globaux */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100%;
+}
 
 /* Mise en page du dashboard */
 .dashboard-entreprise {
@@ -22,6 +28,7 @@ flex-direction: column;
     width: 15%;
     height: 80vh;
     overflow: hidden;
+    border-right:1px solid ;
 }
 
 
@@ -35,7 +42,7 @@ flex-direction: column;
 }
 
 .list-items .item a {
-    color: #fff;
+    color: #000;
     text-decoration: none;
     padding: 10px 0;
     display: block; /* Assure que le lien remplit tout l'espace horizontal de l'item */
@@ -153,68 +160,3 @@ ul li a:hover::after {
 	  text-decoration: none;
   }
   
-  .recent-orders {
-  margin-top: 20px;
-}
-
-.ro-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.recent-orders-title {
-  margin-bottom: 10px;
-}
-
-.show-all {
-  color: #007bff;
-  text-decoration: none;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #fff;
-}
-
-table th,
-table td {
-  border: 1px solid #dee2e6;
-  padding: 8px;
-}
-
-table th {
-  background-color: #f8f9fa;
-}
-
-table tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.action-buttons {
-  display: flex;
-  gap: 5px;
-}
-
-.accept-button,
-.reject-button {
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
-}
-
-.accept-button {
-  background-color: #28a745;
-  color: #fff;
-}
-
-.reject-button {
-  background-color: #dc3545;
-  color: #fff;
-}
-
-.accept-button:hover,
-.reject-button:hover {
-  filter: brightness(85%);
-}

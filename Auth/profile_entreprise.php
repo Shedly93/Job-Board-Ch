@@ -45,9 +45,80 @@ if (isset($_SESSION['user_id'])) {
     <title>Profil Entreprise</title>
     <link rel="stylesheet" href="profileEntreprise.css">
         <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="modal.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+<style>
+ /* Style général pour les modals */
+.modal {
+    display: none; /* Par défaut, la modal est cachée */
+    position: fixed; /* Position fixe pour rester au-dessus du contenu */
+    z-index: 1000; /* Assure que la modal est au-dessus du reste du contenu */
+    left: 0;
+    top: 0;
+    width: 100%; /* Prend toute la largeur de l'écran */
+    height: 100%; /* Prend toute la hauteur de l'écran */
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour l'arrière-plan */
+    overflow: hidden; /* Ajoute une barre de défilement si nécessaire */
+}
 
+/* Contenu de la modal */
+.modal-content {
+    background-color: #fefefe; /* Fond blanc pour le contenu */
+    border: 1px solid #888;
+    width: 30%; /* Largeur de la modal */
+    border-radius: 8px;
+    position: relative; 
+    top: -15%;
+}
+
+/* Bouton de fermeture */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Style pour les éléments de formulaire à l'intérieur de la modal */
+.modal-content label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="email"] {
+    width: calc(100% - 20px); /* Largeur du champ de formulaire */
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.modal-content input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal-content input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Afficher la modal */
+.modal.show {
+    display: block;
+}
+
+</style>
 </head>
 <body>
     <script>
@@ -73,25 +144,22 @@ if (isset($_SESSION['user_id'])) {
       
     </script>
 <div class="profile-page">
-    <div class="act-emploi">
+    <!-- <div class="act-emploi">
         <button class="btn-envoie-emploi" onclick="redirectToGestionEmploisEntreprise(<?= $user_id ?>, <?= $user_id ?>, 'entreprise')">
             Emploi
         </button>
-    </div>
+    </div> -->
    <div class="profile">
   <div class="profile-bg"></div>
   <section class="container-profile">
     <aside class="profile-image">
-      <a class="camera" href="#">
-                    <i class="fas fa-camera"></i>
-                </a>
     </aside>
     <section class="profile-info">
       <h1 class="first-name"><?= $entreprise_info->getNom() ?></h1>
       <!-- <h1 class="second-name">Yun He</h1> -->
       <h2>ABOUT</h2>
       <p>
-        hello hello, I'm angela, artist and developer 🌼 student at stanford; intern at zynga 🌱 happy to be here! 🌿 let's code the best we can!
+       
   <br>
         Email:  <?= $entreprise_info->getEmail() ?>
 <br>
@@ -101,40 +169,20 @@ Adresse : <?= $entreprise_info->getAdresse() ?>
 <br>
 Domaine : <?= $entreprise_info->getDomaine() ?>     
     </p>
-
-      <aside class="social-media-icons">
-        <a href="https://twitter.com/zephybite" >
-                        <i class="fab fa-twitter"></i>
-                    </a>
-        <a href="https://codepen.io/zephyo" >
-                        <i class="fab fa-codepen"></i>
-                    </a>
-        <a href="https://github.com/zephyo" >
-                        <i class="fab fa-github"></i>
-                    </a>
-        </a>
-        <a href="https://medium.com/@zephyo" >
-                        <i class="fab fa-medium"></i>
-                    </a>
-      </aside>
-    </section>
-  </section>
-  <section class="statistics">
+<div class="statistics-entreprise" style=" width:fit-content ; position:relative;top: -6%; left: 16rem;">
    <button id="openModalBtn" class="btn-modifier" onclick="openModalWithData('<?= $entreprise_info->getId() ?>', '<?= $entreprise_info->getNom() ?>', '<?= $entreprise_info->getAdresse() ?>', '<?= $entreprise_info->getEmail() ?>', '<?= $entreprise_info->getLocalisation() ?>', '<?= $entreprise_info->getDomaine() ?>')">Modifier</button>
 
+  </div>
+     
+    </section>
   </section>
+  
 
   <button class="icon close"></button>
     </div>
   
 </div>
-  <div class="footer-copyright">
-<div class="footer-copyright-wrapper">
-  <p class="footer-copyright-text">
-    <a class="footer-copyright-link" href="#" target="_self"> ©2024. | CH-JOB-BOARD. | All rights reserved. </a>
-  </p>
-</div>
-</div>
+ 
 
 <div id="myModal" class="modal">
     <div class="modal-content">
@@ -156,7 +204,7 @@ Domaine : <?= $entreprise_info->getDomaine() ?>
                 <label for='newDomaine'>Nouveau Domaine:</label>
                 <input type='text' name='newDomaine' id='newDomaine'><br>
 
-                <input type='submit' name='update' value='Modifier'>
+                <input type='submit' name='update'  value='Modifier'>
             </form>
         </div>
     </div>
