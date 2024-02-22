@@ -48,16 +48,16 @@ if (isset($_POST['logout'])) {
 <body>
 <div style="overflow: hidden; width: 100%; position: absolute;">
        <nav>
-<img src="http://localhost:8080/Job-Board-Ch/Home/Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
+<img src="Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
             <ul>
                 <li><a href="../../Home/index.html">Accueil</a></li>
                 <li><a href="../Auth//GestionEmploisutilisateur.php">Offres d'emploi</a></li>
                 <li><a href="../..//Home/contact.html">Contact</a></li>
-                <li><a href="../Auth//login.html">Login</a></li>
+                <li><a href="../Auth//login.html">Logout</a></li>
            
             </ul>
             
-            <div class="dropdown">
+            <!-- <div class="dropdown">
     <button class="dropbtn">Register  
       <i class="fa fa-caret-down"></i>
     </button>
@@ -65,7 +65,7 @@ if (isset($_POST['logout'])) {
       <a href="../Auth/InscriUtilisateur.html">Utilisateur</a>
       <a href="../Auth//inscriEntreprise.html">Entreprise</a>
     </div>
-  </div> 
+  </div>  -->
 
 
         </nav>
@@ -75,9 +75,9 @@ if (isset($_POST['logout'])) {
           
         </div>
         <form method="GET" id="searchbox">
-    <label for="titre" class="sr-only">Rechercher par titre :</label>
-    <input type="text" name="titre" id="titre">
-    <input type="submit" id="button-submit">
+    <label for="titre" class="sr-only"></label>
+    <input type="text" name="titre" id="titre" placeholder="CHERCHER PAR POSTE">
+    <input type="submit" id="button-submit" value="Search">
 </form>
        <!-- <form method="POST" id="form-nav-logout">
             <input type="submit" name="logout" value="Logout" class="logout" >

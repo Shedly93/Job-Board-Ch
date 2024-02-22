@@ -154,13 +154,13 @@ if (isset($_GET['id_emploi'])) {
                     ?>
                 </section>
             </div>
-            <div class="footer-copyright">
+            <!-- <div class="footer-copyright">
                 <div class="footer-copyright-wrapper">
                     <p>
                         <a href="#" target="_self"> ©2024. | CH-JOB-BOARD. | Tous droits réservés. </a>
                     </p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>

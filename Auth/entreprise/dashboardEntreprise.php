@@ -17,7 +17,7 @@
                 <img src="\Job-Board-Ch\Auth\Logo-JobBoard.png" alt="Logo de Job-Board-CH" class="logo" />
                 <ul>
                     <li><a href="../../Home/index.html">Accueil</a></li>
-                    <li><a href="/Auth/GestionEmploisutilisateur.php">Offres d'emploi</a></li>
+                    <li><a href="/Auth/GestionEmploisutilisateur.php">Candidature</a></li>
                     <li><a href="../..//Home/contact.html">Contact</a></li>
                     <li><a href="../profile_entreprise.php">Profile</a></li>
                     <li><a href="#" id="logout">Logout</a></li>
@@ -34,7 +34,7 @@
                                 <span class="material-icons-sharp">
                                     
                                 </span>
-                                <span>emploi</span>
+                                <span>Mes Emploi</span>
                             </a>
                         </li>
                         <li class="item">
@@ -44,14 +44,14 @@
                         </li>
                         <li class="item">
                             <a href="#">
-                                <span>Applications</span>
+                                <span>Candidature</span>
                             </a>
                         </li>
-                        <li class="item">
+                        <!-- <li class="item">
                             <a href="#">
                                 <span>Ajouter un produit</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="item">
                             <a href="#">
                                 <span>Se Deconnecter</span>

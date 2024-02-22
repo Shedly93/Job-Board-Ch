@@ -111,7 +111,7 @@ margin-top: 15px;
 }
 
     input[type="submit"] {
-        background-color: #4CAF50;
+        background-color: #404042;
         color: #fff;
         padding: 8px 16px;
         border: none;
@@ -120,7 +120,7 @@ margin-top: 15px;
     }
 
     input[type="submit"]:hover {
-        background-color: #45a049;
+        background-color: #be6308;
     }
 
 
@@ -147,7 +147,7 @@ input[type="text"] {
 }
 
 #button-submit {
-    background-color: #4CAF50;
+    background-color: #404042;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -158,7 +158,7 @@ input[type="text"] {
 }
 
 #button-submit:hover {
-    background-color: #45a049;
+    background-color: #be6308;
 }
 
 #form-nav-logout{
