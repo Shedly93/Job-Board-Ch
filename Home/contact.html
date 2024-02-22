@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Responsive Contact Us Page</title>
   <script src="https://kit.fontawesome.com/c32adfdcda.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="contact.css">
@@ -65,25 +65,25 @@
         </div>
         
         <div class="contact-form">
-          <form action="" id="contact-form">
+          <form action="submit_contact.php" id="contact-form" method="post">
             <h2>Send Message</h2>
             <div class="input-box">
-              <input type="text" required="true" name="">
+              <input type="text" required="true" name="name">
               <span>Full Name</span>
             </div>
             
             <div class="input-box">
-              <input type="email" required="true" name="" >
+              <input type="email" required="true" name="email">
               <span>Email</span>
             </div>
             
             <div class="input-box">
-              <textarea required="true" name=""></textarea>
+              <textarea required="true" name="message"></textarea>
               <span>Type your Message...</span>
             </div>
             
             <div class="input-box">
-              <input type="submit" value="Send" name="">
+              <input type="submit" value="Send" name="submit">
             </div>
           </form>
         </div>

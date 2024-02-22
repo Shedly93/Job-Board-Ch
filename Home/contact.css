@@ -19,12 +19,12 @@
 
 
 section {
-  position: relative;
-  z-index: 3;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  top: 5%;
-  height: 95vh;
+position: relative;
+    z-index: 3;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    top: -3%;
+    height: 95vh;
 }
 
 .container {
